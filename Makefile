@@ -2,10 +2,9 @@ setup-poetry:
 	pip install poetry && poetry install
 
 migrate:
-	python manage.py runserver
+	python manage.py migrate
 
-setup:
-	setup-poetry migrate
+setup: setup-poetry migrate
 
 up:
 	python manage.py runserver
