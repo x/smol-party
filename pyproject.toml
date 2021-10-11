@@ -1,0 +1,28 @@
+[tool.poetry]
+authors = ["Devon Peticolas <devon@peticol.as>"]
+description = "A lightweight alternative to a facebook event."
+name = "event-planner"
+version = "0.0.1"
+
+[tool.poetry.dependencies]
+python = "3.9.4"
+Django = "^3.2.8"
+
+[tool.poetry.dev-dependencies]
+black = { version = "20.8b1", allow-prereleases = true } # Required as non-dev to make papermill happy
+isort = "^5.9.3"
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+ensure_newline_before_comments = "True"
+force_grid_wrap = 0
+include_trailing_comma = "True"
+line_length = 100
+multi_line_output = 3
+use_parentheses = "True"
+
+[build-system]
+build-backend = "poetry.masonry.api"
+requires = ["poetry>=0.12"]

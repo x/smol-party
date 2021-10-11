@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+{% include "./header.html" with title="Create Event" %}
+
+<body>
+    <main class="container">
+        <h1>Create an event</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" class="contrast" value="Submit">
+        </form>
+    </main>
+</body>

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+{% include "./header.html" with title=event.title %}
+
+<body>
+    <main class="container">
+        <hgroup>
+            <h1>RSVP to {{ rsvp.event.title }}</h1>
+            <h2>{{ rsvp.event.date }}</h2>
+        </hgroup>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" class="contrast" value="Submit">
+        </form>
+    </main>
+</body>

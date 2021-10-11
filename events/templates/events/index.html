@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+{% include "./header.html" with title=event.title %}
+
+<body>
+    <main class="container">
+		<form><a href="{% url 'events:create' %}" role="button" class="contrast">Create a new Event</a></form>
+        <h2>Upcoming Events</h2>
+
+        {% if events %}
+        <ul>
+            {% for event in events %}
+            <li><a href="{% url 'events:detail' event.id %}">{{ event.title }}</a> - {{ event.start_time }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No upcoming events.</p>
+        {% endif %}
+
+    </main>
+</body>
+
+</html>

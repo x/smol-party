@@ -1,0 +1,11 @@
+.rsvps ul {
+  padding-left: 0;
+}
+
+.rsvps ul li {
+  list-style: none;
+}
+
+.rsvps li:before {
+  content: "☑ ";
+}
