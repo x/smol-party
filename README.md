@@ -2,6 +2,11 @@
 
 A simple event planner alternative to FB Events that doesn't require logins.
 
+## How to dev
+
+1. `make setup`
+2. `make up`
+
 ## Future Work
 
 * Text integration
