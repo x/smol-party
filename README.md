@@ -2,7 +2,7 @@
 
 A simple event planner alternative to FB Events that doesn't require logins.
 
-[link]("http://smol.party")
+[https://smol.party]("https://smol.party")
 
 
 ## How to dev
