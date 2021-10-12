@@ -34,4 +34,4 @@ class RSVP(TimeStampMixin):
     name = models.CharField(max_length=60)
 
     def __str__(self):
-        return f"{self.name} RSVP'd to {self.event.title} ({self.session})"
+        return f"{self.name} RSVP'd to {self.event.title}"
