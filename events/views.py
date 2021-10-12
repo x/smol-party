@@ -1,5 +1,6 @@
 from datetime import date, datetime
 
+import arrow
 from django.forms.widgets import DateTimeInput
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -15,7 +16,8 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return the 10 upcoming events."""
-        return Event.objects.filter(start_time__gte=date.today()).order_by("start_time")[:10]
+        today = arrow.now().floor("day").isoformat()  # TODO timezones
+        return Event.objects.filter(start_time__gte=today).order_by("start_time")[:10]
 
 
 class DetailView(generic.DetailView):

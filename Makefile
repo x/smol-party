@@ -6,11 +6,19 @@ setup: setup-poetry migrate
 
 
 # Django
-migrate:
-	python manage.py migrate
+makemigrate:
+	poetry run python manage.py makemigrations && poetry run python manage.py makemigrations events
 
-up:
-	python manage.py runserver
+migrate:
+	poetry run python manage.py migrate
+
+collectstatic:
+	poetry run python manage.py collectstatic
+
+runserver:
+	poetry run python manage.py runserver --nostatic
+
+up: runserver
 
 
 # Formatting
@@ -31,11 +39,14 @@ lint-black:
 	poetry run black --check .
 
 lint-requirements:
-	poetry export -f requirements.txt | diff requirements.txt -
+	poetry export -f requirements.txt --without-hashes | diff requirements.txt -
 
-lint: lint-isort lint-black lint-requirements
+lint: lint-isort lint-black lint-requirementgt
 
 
 # Build
 requirements:
-	poetry export -f requirements.txt -o requirements.txt
+	poetry export -f requirements.txt --without-hashes -o requirements.txt
+
+deploy:
+	gcloud app deploy --project=fluted-current-229319

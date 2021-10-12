@@ -6,6 +6,9 @@ __pycache__
 db.sqlite3
 media
 
+# Static asses
+/static/
+
 # Backup files #
 *.bak
 
@@ -71,6 +74,7 @@ coverage.xml
 
 # Environments
 .env
+._env
 .venv
 env/
 venv/

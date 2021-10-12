@@ -1,12 +1,33 @@
-asgiref==3.4.1; python_version >= "3.6" \
-    --hash=sha256:ffc141aa908e6f175673e7b1b3b7af4fdb0ecb738fc5c8b88f69f055c2415214 \
-    --hash=sha256:4ef1ab46b484e3c706329cedeff284a5d40824200638503f5768edb6de7d58e9
-django==3.2.8; python_version >= "3.6" \
-    --hash=sha256:42573831292029639b798fe4d3812996bfe4ff3275f04566da90764daec011a5 \
-    --hash=sha256:f6d2c4069c9b9bfac03bedff927ea1f9e0d29e34525cec8a68fd28eb2a8df7af
-pytz==2021.3; python_version >= "3.6" \
-    --hash=sha256:3672058bc3453457b622aab7a1c3bfd5ab0bdae451512f6cf25f64ed37f5b87c \
-    --hash=sha256:acad2d8b20a1af07d4e4c9d2e9285c5ed9104354062f275f3fcd88dcef4f1326
-sqlparse==0.4.2; python_version >= "3.6" \
-    --hash=sha256:48719e356bb8b42991bdbb1e8b83223757b93789c00910a616a071910ca4a64d \
-    --hash=sha256:0c00730c74263a94e5a9919ade150dfc3b19c574389985446148402998287dae
+arrow==1.2.0; python_version >= "3.6"
+asgiref==3.4.1; python_version >= "3.6"
+cachetools==4.2.4; python_version >= "3.6" and python_version < "4.0"
+certifi==2021.10.8; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version >= "3.6"
+charset-normalizer==2.0.7; python_full_version >= "3.6.0" and python_version >= "3.6"
+django-environ==0.7.0; python_version >= "3.4" and python_version < "4"
+django==3.2.8; python_version >= "3.6"
+google-api-core==2.1.0; python_version >= "3.6"
+google-auth==2.3.0; python_version >= "3.6"
+google-cloud-secret-manager==2.7.2; python_version >= "3.6"
+googleapis-common-protos==1.53.0; python_version >= "3.6"
+grpc-google-iam-v1==0.12.3; python_version >= "3.6"
+grpcio==1.41.0; python_version >= "3.6"
+idna==3.2; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version >= "3.6"
+libcst==0.3.21; python_version >= "3.6"
+mypy-extensions==0.4.3; python_version >= "3.6"
+packaging==21.0; python_version >= "3.6"
+proto-plus==1.19.5; python_version >= "3.6"
+protobuf==3.18.1; python_version >= "3.6"
+psycopg2-binary==2.9.1; python_version >= "3.6"
+pyasn1-modules==0.2.8; python_version >= "3.6"
+pyasn1==0.4.8; python_version >= "3.6" and python_version < "4"
+pyparsing==2.4.7; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.3.0" and python_version >= "3.6"
+python-dateutil==2.8.2; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.3.0" and python_version >= "3.6"
+pytz==2021.3; python_version >= "3.6"
+pyyaml==5.4.1; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version >= "3.6"
+requests==2.26.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version >= "3.6"
+rsa==4.7.2; python_version >= "3.6" and python_version < "4"
+six==1.16.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.3.0" and python_version >= "3.6"
+sqlparse==0.4.2; python_version >= "3.6"
+typing-extensions==3.10.0.2; python_version >= "3.6"
+typing-inspect==0.7.1; python_version >= "3.6"
+urllib3==1.26.7; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version < "4" and python_version >= "3.6"
