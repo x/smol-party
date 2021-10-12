@@ -9,3 +9,19 @@
 .rsvps li:before {
   content: "☑ ";
 }
+
+.boxy {
+  margin: unset;
+  border: 5px solid black;
+}
+
+.party-title {
+  font-family: "Lobster", serif;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.party-tagline {
+  font-family: "Lobster", serif;
+  text-align: center;
+}

@@ -4,37 +4,44 @@
 
 <body>
 	<main class="container">
-		<article>
-		<hgroup>
-			<h1><u>{{ event.title }}</u></h1>
-			<h2><i>{{ event.tagline }}</i></h2>
-		</hgroup>
-		<p>{{ event.description }}</p>
-		<p><b>When:</b> From <mark>{{ event.start_time }}</mark> until <mark>{{ event.end_time }}</mark></p>
-		<p><b>Where:</b> <mark>{{ event.location }}</mark></p>
-		<p>
-		<div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0"
-				marginwidth="0" src="{{ event.google_maps_url|safe }}"></iframe></div>
-		</p>
+		<article class="boxy">
+			<hgroup>
+				<h1 class="party-title"><u>{{ event.title }}</u></h1>
+				<h2 class="party-tagline"><i>{{ event.tagline }}</i></h2>
+			</hgroup>
+			<p>{{ event.description }}</p>
+			<p><b>When:</b> From <mark>{{ event.start_time }}</mark> until <mark>{{ event.end_time }}</mark></p>
+			<p><b>Where:</b> <mark>{{ event.location }}</mark></p>
+			<p>
+			<div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0"
+					marginwidth="0" src="{{ event.google_maps_url|safe }}"></iframe></div>
+			</p>
 
-		{% if event.id|safe in request.session %}
-		<p>Thank you for your RSVP</p>
-		{% else %}
-		<form><a href="{% url 'events:rsvp' event.id %}" role="button" class="contrast">RSVP Now</a></form>
-		{% endif %}
+			<div>
+				<h2>Responses</h2>
+				{% if event.rsvp_set.all %}
+				<div class="rsvps">
+					<ul>
+						{% for rsvp in event.rsvp_set.all %}
+						<li><b>{{ rsvp.name }}</b> is attending</li>
+						{% endfor %}
+					</ul>
+				</div>
+				{% else %}
+				<p>No one has RSVP'd yet.</p>
+				{% endif %}
+			</div>
 
-		<h3>Responses</h3>
-		{% if event.rsvp_set.all %}
-		<div class="rsvps">
-			<ul>
-				{% for rsvp in event.rsvp_set.all %}
-				<li><b>{{ rsvp.name }}</b> is attending</li>
-				{% endfor %}
-			</ul>
-		</div>
-		{% else %}
-		<p>No one has RSVP'd yet.</p>
-		{% endif %}
+			<div>
+				{% if event.id|safe in request.session %}
+				<i>Thank you for RSVPing</i>
+				{% else %}
+				<a href="{% url 'events:rsvp' event.id %}" role="button" class="contrast">RSVP Now</a>
+				{% endif %}
+			</div>
+
+
+		</article>
 	</main>
 </body>
 

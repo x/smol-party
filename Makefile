@@ -16,7 +16,7 @@ collectstatic:
 	poetry run python manage.py collectstatic
 
 runserver:
-	poetry run python manage.py runserver --nostatic
+	poetry run python manage.py runserver
 
 up: runserver
 
