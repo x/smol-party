@@ -9,7 +9,7 @@
 				<h1 class="party-title"><u>{{ event.title }}</u></h1>
 				<h2 class="party-tagline"><i>{{ event.tagline }}</i></h2>
 			</hgroup>
-			<p>{{ event.description }}</p>
+			<p>{{ event.description|linebreaks }}</p>
 			<p><b>When:</b> From <mark>{{ event.start_time }}</mark> until <mark>{{ event.end_time }}</mark></p>
 			<p><b>Where:</b> <mark>{{ event.location }}</mark></p>
 			<p>

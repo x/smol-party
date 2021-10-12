@@ -41,12 +41,14 @@ lint-black:
 lint-requirements:
 	poetry export -f requirements.txt --without-hashes | diff requirements.txt -
 
-lint: lint-isort lint-black lint-requirementgt
+lint: lint-isort lint-black lint-requirements
 
 
 # Build
 requirements:
 	poetry export -f requirements.txt --without-hashes -o requirements.txt
 
-deploy:
+app-deploy:
 	gcloud app deploy --project=fluted-current-229319
+
+deploy: lint-requirements collectstatic app-deploy
