@@ -1,6 +1,9 @@
-# Planner (name TBD)
+# Smol.Party
 
 A simple event planner alternative to FB Events that doesn't require logins.
+
+[link]("http://smol.party")
+
 
 ## How to dev
 
