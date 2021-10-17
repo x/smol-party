@@ -32,16 +32,19 @@ format: format-isort format-black
 
 
 # Linting
-lint-isort:
+isort-check:
 	poetry run isort --check .
 
-lint-black:
+black-check:
 	poetry run black --check .
 
-lint-requirements:
+flake8:
+	poetry run flake8 .
+
+verify-requirements:
 	poetry export -f requirements.txt --without-hashes | diff requirements.txt -
 
-lint: lint-isort lint-black lint-requirements
+lint: flake8 black-check isort-check verify-requirements
 
 
 # Build

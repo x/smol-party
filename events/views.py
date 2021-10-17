@@ -1,5 +1,3 @@
-from datetime import date, datetime
-
 from django.forms.widgets import DateTimeInput
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -14,8 +12,8 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return the 10 upcoming events."""
-        #today = arrow.now().to("America/New_York").floor("day").isoformat()  # TODO timezones
-        #return Event.objects.filter(start_time__gte=today).order_by("start_time")[:10]
+        # today = arrow.now().to("America/New_York").floor("day").isoformat()  # TODO timezones
+        # return Event.objects.filter(start_time__gte=today).order_by("start_time")[:10]
         return Event.objects.all().order_by("start_time")[:10]
 
 

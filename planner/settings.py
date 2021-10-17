@@ -32,12 +32,14 @@ if os.path.isfile(env_file):
     env.read_env(env_file)
 
 if LOCAL:
+    logging.info("No GOOGLE_CLOUD_PROJECT set; I assume we're running local and will use sqllite")
     DEBUG = True
     placeholder = f"SECRET_KEY=a\n" f"DATABASE_URL=sqlite://{os.path.join(BASE_DIR, 'db.sqlite3')}"
     print(placeholder)
     env.read_env(io.StringIO(placeholder))
 
 else:
+    logging.info("GOOGLE_CLOUD_PROJECT is set; I assume we're running in production")
     # Pull secrets from Secret Manager
     project_id = os.environ.get("GOOGLE_CLOUD_PROJECT")
     client = secretmanager.SecretManagerServiceClient()
