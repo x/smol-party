@@ -24,7 +24,7 @@ class Event(TimeStampMixin):
     def __str__(self):
         return f"{self.title} ({self.start_time})"
 
-    def google_maps_url(self):
+    def google_maps_iframe_url(self):
         return (
             "https://maps.google.com/maps?"
             + "width=100%25&amp;height=400&amp;hl=en"
@@ -45,9 +45,11 @@ class Event(TimeStampMixin):
         )
 
     def google_maps_url(self):
+        """This URL will open google maps on an iOS or Android device."""
         return f"https://maps.google.com/?q={quote(self.location)}"
 
     def apple_maps_url(self):
+        """This URL will open apple maps on an iOS device."""
         return f"https://maps.apple.com/maps?q={quote(self.location)}"
 
 
