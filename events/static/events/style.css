@@ -19,9 +19,27 @@
   font-family: "Lobster", serif;
   font-size: 3rem;
   text-align: center;
+  text-decoration: underline;
 }
 
 .party-tagline {
   font-family: "Lobster", serif;
   text-align: center;
+  font-style: italic;
+}
+
+.party-detail-header {
+  font-family: "Lobster", serif;
+  font-size: 3rem;
+  text-decoration: underline;
+  margin-bottom: 0;
+}
+
+.party-detail {
+  font-family: "Lobster", serif;
+  font-weight: bold;
+}
+
+.bump {
+  margin-bottom: 5px;
 }

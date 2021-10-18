@@ -6,19 +6,38 @@
 	<main class="container">
 		<article class="boxy">
 			<hgroup>
-				<h1 class="party-title"><u>{{ event.title }}</u></h1>
-				<h2 class="party-tagline"><i>{{ event.tagline }}</i></h2>
+				<h1 class="party-title">{{ event.title }}</h1>
+				<h2 class="party-tagline">{{ event.tagline }}</h2>
 			</hgroup>
 			<p>{{ event.description|linebreaks }}</p>
-			<p><b>When:</b> From <mark>{{ event.start_time }}</mark> until <mark>{{ event.end_time }}</mark></p>
-			<p><b>Where:</b> <mark>{{ event.location }}</mark></p>
+			<p><span class="party-detail">When:</span>
+				From <mark>{{ event.start_time }}</mark>
+				until <mark>{{ event.end_time }}</mark>
+			</p>
+			<p><span class="party-detail">Where:</span>
+				<a href='{{ event.google_maps_url|safe }}'>
+					<a href='{{ event.apple_maps_url|safe }}'>
+						<mark>{{ event.location }}</mark></a></a>
+			</p>
 			<p>
 			<div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0"
 					marginwidth="0" src="{{ event.google_maps_url|safe }}"></iframe></div>
 			</p>
 
+			<div class="grid">
+				{% if event.id|safe in request.session %}
+				<a role="button" class="contrast bump outline">You're RSVP'd!</a>
+				{% else %}
+				<a href="{% url 'events:rsvp' event.id %}" role="button" class="contrast bump">RSVP Now</a>
+				{% endif %}
+				<a role="button" class="contrast bump"
+					onclick='shareEvent("Smol.Party - {{ event.title }}", "RSVP to this event!", window.location.href)'>Share</a>
+				<a href="{{ event.add_to_gcal_link|safe }}" role="button" class="contrast bump">Add to Gcal</a>
+			</div>
+
+
 			<div>
-				<h2>Responses</h2>
+				<h2 class="party-detail-header">Responses</h2>
 				{% if event.rsvp_set.all %}
 				<div class="rsvps">
 					<ul>
@@ -32,17 +51,10 @@
 				{% endif %}
 			</div>
 
-			<div>
-				{% if event.id|safe in request.session %}
-				<i>Thank you for RSVPing</i>
-				{% else %}
-				<a href="{% url 'events:rsvp' event.id %}" role="button" class="contrast">RSVP Now</a>
-				{% endif %}
-			</div>
-
-
 		</article>
 	</main>
 </body>
+
+{% include "./footer.html" %}
 
 </html>

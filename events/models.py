@@ -25,7 +25,30 @@ class Event(TimeStampMixin):
         return f"{self.title} ({self.start_time})"
 
     def google_maps_url(self):
-        return f"https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q={quote(self.location)}+({quote(self.title)})&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+        return (
+            "https://maps.google.com/maps?"
+            + "width=100%25&amp;height=400&amp;hl=en"
+            + f"&amp;q={quote(self.location)}+({quote(self.title)})"
+            + f"&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+        )
+
+    def add_to_gcal_link(self):
+        start_time = self.start_time.strftime("%Y%m%dT%H%M%SZ")
+        end_time = self.end_time.strftime("%Y%m%dT%H%M%SZ")
+        return (
+            "https://calendar.google.com/calendar/render?"
+            + "action=TEMPLATE"
+            + f"&dates={start_time}/{end_time}"
+            + f"&location={quote(self.location)}"
+            + f"&text={quote(self.title)}"
+            + f"&details={quote(self.description)}"
+        )
+
+    def google_maps_url(self):
+        return f"https://maps.google.com/?q={quote(self.location)}"
+
+    def apple_maps_url(self):
+        return f"https://maps.apple.com/maps?q={quote(self.location)}"
 
 
 class RSVP(TimeStampMixin):
