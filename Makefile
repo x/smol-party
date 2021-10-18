@@ -54,4 +54,4 @@ requirements:
 app-deploy:
 	gcloud app deploy --project=fluted-current-229319
 
-deploy: lint-requirements collectstatic app-deploy
+deploy: verify-requirements collectstatic app-deploy
