@@ -7,6 +7,7 @@
 - [x] Share
 - [ ] WYSIWYG Event Edit
 	- [ ] Render location while editing
+	- [ ] Add "Titlefy Case" button when adding event title
 
 ## Features
 - [ ] Parties can't end before they start
