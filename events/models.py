@@ -2,6 +2,13 @@ import uuid
 from urllib.parse import quote
 
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+
+POTLUCK_COURSE_CHOICES = [
+    ("M", "Main dish"),
+    ("A", "Appetizer"),
+    ("D", "Dessert"),
+]
 
 
 class TimeStampMixin(models.Model):
@@ -20,6 +27,7 @@ class Event(TimeStampMixin):
     start_time = models.DateTimeField("from")
     end_time = models.DateTimeField("until")
     location = models.CharField(max_length=256)
+    potluck = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.title} ({self.start_time})"
@@ -57,6 +65,16 @@ class RSVP(TimeStampMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     name = models.CharField(max_length=60)
+
+    # Potluck-specific fields
+    potluck_dish_description = models.CharField(max_length=256, blank=True)
+    potluck_dish_course = models.CharField(
+        max_length=1, choices=POTLUCK_COURSE_CHOICES, default="M", blank=True
+    )
+    potluck_dish_is_vegetarian = models.BooleanField(default=False, blank=True)
+    potluck_dish_is_vegan = models.BooleanField(default=False, blank=True)
+    potluck_dish_contains_nuts = models.BooleanField(default=False, blank=True)
+    potluck_dish_is_spicy = models.BooleanField(default=False, blank=True)
 
     def __str__(self):
         return f"{self.name} RSVP'd to {self.event.title}"

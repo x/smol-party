@@ -2,22 +2,25 @@
 <html lang="en">
 {% include "./header.html" with title=event.title %}
 
+<script>console.log("YOLO {{ event.potluck }}");</script>
+
 <body>
     <main class="container">
         <article class="boxy">
             <h1 class="party-title">RSVP to <u>{{ event.title }}</u></h1>
             <form method="post">
                 {% csrf_token %}
-                {% for field in form %}
-                <div class="fieldWrapper">
-                    {{ filed.errors }}
-                    {{ filed.label_tag }}
-                    <label for="{{ field.id_for_label }}">
-                        {{ field.label|safe }}
-                        {{ field }}
-                    </label>
-                </div>
-                {% endfor %}
+                {% include "./form_field.html" with field=form.name %}
+
+                {% if event.potluck %}
+                {% include "./form_field.html" with field=form.potluck_dish_description %}
+                {% include "./form_field.html" with field=form.potluck_dish_course %}
+                {% include "./form_field.html" with field=form.potluck_dish_is_vegetarian %}
+                {% include "./form_field.html" with field=form.potluck_dish_is_vegan %}
+                {% include "./form_field.html" with field=form.potluck_dish_is_spicy %}
+                {% include "./form_field.html" with field=form.potluck_dish_contains_nuts %}
+                {% endif %}
+
                 <input type="submit" class="contrast" value="Submit">
             </form>
         </article>

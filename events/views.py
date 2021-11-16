@@ -1,4 +1,4 @@
-from django.forms.widgets import DateTimeInput
+from django.forms.widgets import DateTimeInput, HiddenInput
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views import generic
@@ -24,7 +24,16 @@ class DetailView(generic.DetailView):
 
 class CreateRSVPView(generic.CreateView):
     model = RSVP
-    fields = ["name"]
+    fields = [
+        "name",
+        # Only shows up if potluck
+        "potluck_dish_description",
+        "potluck_dish_course",
+        "potluck_dish_is_vegetarian",
+        "potluck_dish_is_vegan",
+        "potluck_dish_contains_nuts",
+        "potluck_dish_is_spicy",
+    ]
 
     def form_valid(self, form):
         form.instance.event_id = self.kwargs["event_id"]

@@ -20,8 +20,8 @@
 						<mark>{{ event.location }}</mark></a></a>
 			</p>
 			<p>
-			<div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0"
-					marginwidth="0" src="{{ event.google_maps_iframe_url|safe }}"></iframe></div>
+			<div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+					src="{{ event.google_maps_iframe_url|safe }}"></iframe></div>
 			</p>
 
 			<div class="grid">
@@ -42,7 +42,7 @@
 				<div class="rsvps">
 					<ul>
 						{% for rsvp in event.rsvp_set.all %}
-						<li><b>{{ rsvp.name }}</b> is attending</li>
+						{% include "./rsvp_detail.html" with rsvp=rsvp %}
 						{% endfor %}
 					</ul>
 				</div>

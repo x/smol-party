@@ -10,6 +10,22 @@
   content: "☑ ";
 }
 
+.rsvp em {
+  border-bottom: None;
+}
+
+.rsvp-name {
+  font-weight: bold;
+}
+
+.rsvp-dish-name {
+  font-weight: bold;
+}
+
+.rsvp-dish-atts em {
+  border-bottom: none;
+}
+
 .boxy {
   margin: unset;
   border: 5px solid black;

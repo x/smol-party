@@ -1,0 +1,11 @@
+<li><span class="rsvp-name">{{ rsvp.name }}</span> is attending
+    {% if event.potluck %}
+    with <span class="rsvp-dish-name">{{ rsvp.potluck_dish_description }}</span>
+    <small>
+        {% if rsvp.potluck_dish_is_vegetarian %}<em data-tooltip="Vegetarian">🌱</em>{% endif %}
+        {% if rsvp.potluck_dish_is_vegan %}<em data-tooltip="Vegan">Ⓥ</em>{% endif %}
+        {% if rsvp.potluck_dish_is_spicy %}<em data-tooltip="Spicy">🌶</em>{% endif %}
+        {% if rsvp.potluck_dish_contains_nuts %}<em data-tooltip="Contains Nuts">🥜</em>{% endif %}
+    </small>
+    {% endif %}
+</li>

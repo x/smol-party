@@ -1,0 +1,24 @@
+{
+  // Establish python path to be in the virtual environment specified in README setup section.
+  "python.pythonPath": "~/.pyenv/versions/3.9.1/envs/py3",
+
+  // Flake8 Linting
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  //"python.linting.flake8Path": "~/.pyenv/versions/3.9.4/envs/science/bin/flake8",
+
+  // Black formatting.
+  "python.formatting.provider": "black",
+  "editor.formatOnSave": true,
+
+  // Sort imports
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "python.sortImports.args": [
+    "--settings-path=${workspaceFolder}/pyproject.toml"
+  ],
+
+  // HTML Formatting
+  "html.format.wrapLineLength": 160
+}
