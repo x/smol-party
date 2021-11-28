@@ -35,7 +35,7 @@ ${VENV}: ${PYENV}
 	echo ${VENV_NAME} >.python-version
 
 ${EGGLINK}: poetry.lock
-	PYENV_VERSION=${NAME} VIRTUAL_ENV=${VENV} ${VENV}/bin/poetry install -E functions -E labs -E kvasir -E test
+	PYENV_VERSION=${NAME} VIRTUAL_ENV=${VENV} ${VENV}/bin/poetry install
 	# an update-install might not necessarily update this
 	touch ${EGGLINK}
 
