@@ -1,9 +1,20 @@
+PYVERSION := 3.9.1
+VENV_NAME := "smolparty-${PYVERSION}"
+
 # Environment
 setup-poetry:
 	pip install poetry && poetry install
 
+# Only do this if you use pyenv-virtualenv like a fucking psychopath
+setup-pyenv-virtualenv:
+	pyenv virtualenv ${PYVERSION} ${VENV_NAME}
+
+setup-.python-version:
+	echo ${VENV_NAME} >.python-version
+
 setup: setup-poetry migrate
 
+setup-plus: setup-poetry setup-pyenv-virtualenv setup-.python-version migrate
 
 # Django
 makemigrate:
