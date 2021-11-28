@@ -6,17 +6,6 @@ from django.views import generic
 from .models import RSVP, Event
 
 
-class IndexView(generic.ListView):
-    template_name = "events/index.html"
-    context_object_name = "events"
-
-    def get_queryset(self):
-        """Return the 10 upcoming events."""
-        # today = arrow.now().to("America/New_York").floor("day").isoformat()  # TODO timezones
-        # return Event.objects.filter(start_time__gte=today).order_by("start_time")[:10]
-        return Event.objects.all().order_by("start_time")[:10]
-
-
 class DetailView(generic.DetailView):
     model = Event
     template_name = "events/detail.html"
