@@ -33,8 +33,17 @@ class Event(TimeStampMixin):
         )
 
     def add_to_gcal_link(self):
-        start_time = self.start_time.strftime("%Y%m%dT%H%M%SZ")
-        end_time = self.end_time.strftime("%Y%m%dT%H%M%SZ")
+        # This is a total fucking hack.
+        # For some reason the dates when you create the events are stored in UTC
+        # and not the timezone of the user creating the event.
+        # And then you end up with an event with the wrong time in the DB
+        # (unless they live in iceland).
+        # But we're just going to assume the person who's adding this link to
+        # their calendar is in the same timezone as the person who made the
+        # event. So basically treat the UTC datetime as if it were naive.
+        # Fucking gross.
+        start_time = self.start_time.strftime("%Y%m%dT%H%M%S")
+        end_time = self.end_time.strftime("%Y%m%dT%H%M%S")
         return (
             "https://calendar.google.com/calendar/render?"
             + "action=TEMPLATE"
