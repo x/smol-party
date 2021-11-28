@@ -1,6 +1,6 @@
 SHELL = /bin/bash
 
-NAME := science
+NAME := smolparty
 PYMAJOR := 3
 PYREV := 9
 PYPATCH := 7
