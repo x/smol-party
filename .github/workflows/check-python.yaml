@@ -1,0 +1,42 @@
+name: check-python
+on: pull_request
+
+concurrency:
+  group: check-code-${{ github.ref }}-1
+  cancel-in-progress: true
+
+jobs:
+  check-python:
+    runs-on: ubuntu-20.04
+    steps:
+      # Checkout the repo
+      - uses: actions/checkout@v2
+
+      # Install python and poetry
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.10.3
+      - name: Install poetry
+        run: pip install poetry
+        shell: bash
+
+      # Install the dependencies but create a virtualenv and cache it for next
+      # time using the poetry.lock file as our cache key.
+      - uses: actions/cache@v2
+        id: cache
+        with:
+          path: /home/runner/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+      - name: Install Dependencies
+        run: |
+          poetry config virtualenvs.create true --local
+          poetry config virtualenvs.in-project false --local
+          poetry install
+
+      # Eventually this will be built into `poetry check`
+      - name: Lint poetry.lock
+        run: poetry run python -m poetry_lock_check check-lock
+
+      # Run black, isort, flake8, and mypy all with the power of an iron fist!
+      - name: Lint code
+        run: poetry run python ironfist.py --format_github
