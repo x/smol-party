@@ -181,7 +181,10 @@ def gh_format_mypy_stdout(mypy_stdout: List[str]) -> Iterable[str]:
 
 
 def print_hr(
-    title: Optional[str] = None, rule_char: str = "=", color: Optional[str] = None, bold: bool = True
+    title: Optional[str] = None,
+    rule_char: str = "=",
+    color: Optional[str] = None,
+    bold: bool = True,
 ) -> None:
     """Print a horizontal rule along with an optional title."""
     try:
@@ -210,7 +213,7 @@ def linter_decoration(title: str, returncode: int, with_group_annotations=False)
         returncode: The returncode of the linter's process denoting success or failure.
         with_group_annotations: If true, will use the grouping workflow commands.
     """
-    print_hr(f"Running {title}", "-", BLACK, bold=True)
+    print_hr(f"Running {title}", "-", bold=True)
     if with_group_annotations:
         print(f"::group::{title}")
     yield
