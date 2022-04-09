@@ -67,29 +67,17 @@ up: runserver
 
 
 # Formatting
-format-black:
+format:
 	poetry run black .
-
-format-isort:
 	poetry run isort .
-
-format: format-isort format-black
 
 
 # Linting
-isort-check:
-	poetry run isort --check .
-
-black-check:
-	poetry run black --check .
-
-flake8:
-	poetry run flake8 .
+lint:
+	poetry run python ./ironfist.py
 
 verify-requirements:
 	poetry export -f requirements.txt --without-hashes | diff requirements.txt -
-
-lint: flake8 black-check isort-check verify-requirements
 
 
 # Build
