@@ -2,8 +2,8 @@ SHELL = /bin/bash
 
 NAME := smolparty
 PYMAJOR := 3
-PYREV := 9
-PYPATCH := 7
+PYREV := 10
+PYPATCH := 3
 PYVERSION := ${PYMAJOR}.${PYREV}.${PYPATCH}
 PYENV := ~/.pyenv/versions/${PYVERSION}
 VENV_NAME := ${NAME}-${PYVERSION}
