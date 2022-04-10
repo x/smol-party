@@ -39,6 +39,8 @@ ${EGGLINK}: poetry.lock
 	# an update-install might not necessarily update this
 	touch ${EGGLINK}
 
+
+# General repo and env managements
 setup: .python-version ${EGGLINK}
 	git submodule update --init
 
@@ -49,6 +51,7 @@ nuke:
 	git clean -fdx -e '*.ipynb'
 	rm -f .python-version
 	/usr/local/bin/pyenv uninstall -f ${PYVERSION}
+
 
 # Django
 makemigrate:
@@ -75,16 +78,3 @@ format:
 # Linting
 lint:
 	poetry run python ./ironfist.py
-
-verify-requirements:
-	poetry export -f requirements.txt --without-hashes | diff requirements.txt -
-
-
-# Build
-requirements:
-	poetry export -f requirements.txt --without-hashes -o requirements.txt
-
-app-deploy:
-	gcloud app deploy --project=fluted-current-229319
-
-deploy: verify-requirements collectstatic app-deploy
