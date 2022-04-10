@@ -9,15 +9,14 @@ jobs:
     runs-on: ubuntu-20.04
     environment: Production
     steps:
+      # Checkout the repo
+      - uses: actions/checkout@v2
 
       # Setup Auth
       - id: 'auth'
         uses: 'google-github-actions/auth@v0'
         with:
           credentials_json: '${{ secrets.GCP_SA_KEY }}'
-
-      # Checkout the repo
-      - uses: actions/checkout@v2
 
       # Install python and poetry
       - uses: actions/setup-python@v2
