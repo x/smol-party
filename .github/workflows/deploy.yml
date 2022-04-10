@@ -7,6 +7,7 @@ on:
 jobs:
   deploy-code:
     runs-on: ubuntu-20.04
+    environment: Production
     steps:
 
       # Setup Auth
