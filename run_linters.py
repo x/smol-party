@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Formatting, linting, and typing rule this repo with an iron fist.
+Formatting, linting, and typing rule this repo.
 
 This script will run all of the linting tools and format checks on the repo in
 parallel (but won't format the code if the format doesn't match). When one exits
@@ -63,7 +63,7 @@ See:
     https://en.wikipedia.org/wiki/ANSI_escape_code
 """
 
-FLAKE_GH_FORMAT = "::error file=%(path)s,line=%(row)d,col=%(col)d::🦾 [Flake8] %(code)s %(text)s"
+FLAKE_GH_FORMAT = "::error file=%(path)s,line=%(row)d,col=%(col)d::[Flake8] %(code)s %(text)s"
 """Flake8 lets us directy format the error output. Instead of manually parsing
 the errors like the other linters, we define that format here.
 
@@ -152,7 +152,7 @@ def gh_format_black_stderr(black_stderr: List[str]) -> Iterable[str]:
     for line in black_stderr:
         if "would reformat" in line:
             _, _, filename = line.split(" ")
-            yield f"::error file={filename}::🦾 [Black] Would reformat {filename}"
+            yield f"::error file={filename}::[Black] Would reformat {filename}"
 
 
 def gh_format_isort_stderr(isort_stderr: List[str]) -> Iterable[str]:
@@ -164,7 +164,7 @@ def gh_format_isort_stderr(isort_stderr: List[str]) -> Iterable[str]:
     for line in isort_stderr:
         if "ERROR" in line:
             _, filename, msg = line.split(" ", 2)
-            yield f"::error file={filename}::🦾 [iSort] {msg.strip()}"
+            yield f"::error file={filename}::[iSort] {msg.strip()}"
 
 
 def gh_format_mypy_stdout(mypy_stdout: List[str]) -> Iterable[str]:
@@ -177,7 +177,7 @@ def gh_format_mypy_stdout(mypy_stdout: List[str]) -> Iterable[str]:
         if " error:" in line:
             err_details, msg = line.split(" error:")
             filename, line, col, *_ = err_details.split(":") + ["", ""]
-            yield f"::error file={filename},line={line},col={col}::🦾 [MyPy] {msg.strip()}"
+            yield f"::error file={filename},line={line},col={col}::[MyPy] {msg.strip()}"
 
 
 def print_hr(
@@ -254,10 +254,10 @@ async def _main():
             print(line)
 
     if any([black_returncode, isort_returncode, flake_returncode, mypy_returncode]):
-        print_hr("Iron Fist Linting Failed", "=", RED, bold=True)
+        print_hr("Linting Failed", "=", RED, bold=True)
         sys.exit(1)
     else:
-        print_hr("Iron Fist Linting Passed", "=", GREEN, bold=True)
+        print_hr("Linting Passed", "=", GREEN, bold=True)
         sys.exit(0)
 
 

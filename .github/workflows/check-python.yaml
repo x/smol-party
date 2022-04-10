@@ -33,6 +33,6 @@ jobs:
           poetry config virtualenvs.in-project false --local
           poetry install
 
-      # Run black, isort, flake8, and mypy all with the power of an iron fist!
+      # Run black, isort, flake8, and mypy!
       - name: Lint code
-        run: poetry run python ironfist.py --format_github
+        run: poetry run python run_linters.py --format_github
