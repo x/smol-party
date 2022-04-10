@@ -29,7 +29,7 @@ class Event(TimeStampMixin):
             "https://maps.google.com/maps?"
             + "width=100%25&amp;height=400&amp;hl=en"
             + f"&amp;q={quote(self.location)}+({quote(self.title)})"
-            + f"&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+            + "&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
         )
 
     def add_to_gcal_link(self):

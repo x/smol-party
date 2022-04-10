@@ -3,4 +3,5 @@ max-line-length = 100
 max-complexity = 15
 filename = *.py
 exclude = .git,__pycache__,.mypy_cache
-ignore = E501
+ignore = E501,W503
+

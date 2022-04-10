@@ -1,0 +1,46 @@
+name: deploy
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  deploy-code:
+    runs-on: ubuntu-20.04
+    steps:
+
+      # Setup Auth
+    k - id: 'auth'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      # Checkout the repo
+      - uses: actions/checkout@v2
+
+      # Install python and poetry
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.10.3
+      - name: Install poetry
+        run: pip install poetry
+        shell: bash
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: poetry install
+
+      # Export the poetry.lock file to requirementx.txt
+      - name: Export requirements.txt
+        run: poetry export -f requirements.txt --without-hashes -o requirements.txt
+
+      # Collectstatic
+      - name: Collectstatic
+        run: poetry run python manage.py collectstatic
+
+      # Deploy the code to appengine
+      - id: Deploy
+        uses: 'google-github-actions/deploy-appengine@v0'
+        with:
+          deliverables: 'app.yaml'
+

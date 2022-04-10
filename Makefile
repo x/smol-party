@@ -2,8 +2,8 @@ SHELL = /bin/bash
 
 NAME := smolparty
 PYMAJOR := 3
-PYREV := 9
-PYPATCH := 7
+PYREV := 10
+PYPATCH := 3
 PYVERSION := ${PYMAJOR}.${PYREV}.${PYPATCH}
 PYENV := ~/.pyenv/versions/${PYVERSION}
 VENV_NAME := ${NAME}-${PYVERSION}
@@ -39,6 +39,8 @@ ${EGGLINK}: poetry.lock
 	# an update-install might not necessarily update this
 	touch ${EGGLINK}
 
+
+# General repo and env managements
 setup: .python-version ${EGGLINK}
 	git submodule update --init
 
@@ -49,6 +51,7 @@ nuke:
 	git clean -fdx -e '*.ipynb'
 	rm -f .python-version
 	/usr/local/bin/pyenv uninstall -f ${PYVERSION}
+
 
 # Django
 makemigrate:
@@ -67,36 +70,11 @@ up: runserver
 
 
 # Formatting
-format-black:
+format:
 	poetry run black .
-
-format-isort:
 	poetry run isort .
-
-format: format-isort format-black
 
 
 # Linting
-isort-check:
-	poetry run isort --check .
-
-black-check:
-	poetry run black --check .
-
-flake8:
-	poetry run flake8 .
-
-verify-requirements:
-	poetry export -f requirements.txt --without-hashes | diff requirements.txt -
-
-lint: flake8 black-check isort-check verify-requirements
-
-
-# Build
-requirements:
-	poetry export -f requirements.txt --without-hashes -o requirements.txt
-
-app-deploy:
-	gcloud app deploy --project=fluted-current-229319
-
-deploy: verify-requirements collectstatic app-deploy
+lint:
+	poetry run python ./ironfist.py
