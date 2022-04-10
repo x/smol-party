@@ -33,10 +33,6 @@ jobs:
           poetry config virtualenvs.in-project false --local
           poetry install
 
-      # Eventually this will be built into `poetry check`
-      - name: Lint poetry.lock
-        run: poetry run python -m poetry_lock_check check-lock
-
       # Run black, isort, flake8, and mypy all with the power of an iron fist!
       - name: Lint code
         run: poetry run python ironfist.py --format_github
