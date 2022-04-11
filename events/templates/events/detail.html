@@ -9,7 +9,7 @@
 				<h1 class="party-title">{{ event.title }}</h1>
 				<h2 class="party-tagline">{{ event.tagline }}</h2>
 			</hgroup>
-			<p>{{ event.description|linebreaks|urlize }}</p>
+			<p><div class="party-description">{{ event.description|safe }}</div></p>
 			<p><span class="party-detail">When:</span>
 				From <mark>{{ event.start_time }}</mark>
 				until <mark>{{ event.end_time }}</mark>
@@ -53,7 +53,8 @@
 
 		</article>
 		<footer>
-			<small><a href="https://github.com/x/smol-party" class="secondary">Show me the source code!</a>!</small>
+			<center><small>Smol.Party is <a href="https://github.com/x/smol-party">open source</a> and free for you to
+					use to <a href="../create">make your own smol party</a> invite.</small></center>
 		</footer>
 	</main>
 </body>

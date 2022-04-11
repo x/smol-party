@@ -77,4 +77,4 @@ format:
 
 # Linting
 lint:
-	poetry run python ./ironfist.py
+	poetry run python ./run_linters.py
