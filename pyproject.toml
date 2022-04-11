@@ -12,6 +12,7 @@ google-cloud-secret-manager = "^2.7"
 psycopg2-binary = "^2.9"
 arrow = "^1.2"
 django-widget-tweaks = "^1.4.12"
+base58 = "^2.1.1"
 
 [tool.poetry.dev-dependencies]
 black = { version = "20.8b1", allow-prereleases = true }
