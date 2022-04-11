@@ -52,6 +52,8 @@
   border-left-style: hidden;
   border-bottom-style: groove;
   border-width: 0px;
+  /* Somewhere out there someone who knows CSS is crying */
+  height: unset !important;
 }
 
 .pseudo-mark {
@@ -68,8 +70,9 @@
   all: revert;
 }
 
-.party-description {
-  min-height: 15rem;
+
+#editor .party-description {
+  min-height: 12rem;
   padding: 5px;
 }
 

@@ -41,6 +41,8 @@ class CreateEventView(generic.CreateView):
         form = super(CreateEventView, self).get_form()
         form.fields["start_time"].widget = DateTimeInput(attrs={"type": "datetime-local"})
         form.fields["end_time"].widget = DateTimeInput(attrs={"type": "datetime-local"})
+        # Set the description to not be "required" because we're hiding it in the template. This raises issues in Safari.
+        form.fields["description"].required = False
         return form
 
     def get_success_url(self):

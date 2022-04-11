@@ -27,7 +27,7 @@
                         <span class="party-detail">Description</span>
                     </label>
                     <div id="editor" class="boxy"></div>
-                    {% render_field form.description placeholder="" class+="hidden" %}
+                    {% render_field form.description class+="hidden" %}
                 </div>
                 <br>
 
@@ -55,7 +55,7 @@
                         <span class="party-detail">Location</span>
                     </label>
                     {% render_field form.location class+="boxy" %}
-                    <div id="location-preview" style="width: 100%"></div>
+                    <div id="location-preview"></div>
                 </div>
                 <p></p>
                 <input type="submit" class="contrast" value="Submit">
@@ -87,11 +87,15 @@
                 'underline',
                 'italic',
                 'strikethrough',
-                'heading1',
+                {
+                  name: 'heading1',
+                  icon: '<b>H</b>',
+                  title: 'Heading 1',
+                  result: () => pell.exec('formatBlock', '<h1>')
+                },
                 'line',
                 'olist',
                 'ulist',
-                'quote',
                 'image',
                 'link',
             ],
@@ -100,7 +104,5 @@
                 content: 'party-description',
             }
         })
-
-        editor.content.innerHTML = 'Put a description of your smol party here.'
     </script>
 </body>
