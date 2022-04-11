@@ -58,3 +58,18 @@
   background-color: var(--mark-background-color);
   color: var(--mark-color);
 }
+
+/* Revert all of the styling done by the pico framework to any of the elements
+ * used for pell (except "_pell-content" which we want the style for).
+ * TBH, I didn't even know CSS could do this. */
+* [class^="pell-"] {
+  all: revert;
+}
+
+._pell-content {
+  min-height: 15rem;
+}
+
+.hidden {
+  display: none;
+}

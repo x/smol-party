@@ -3,62 +3,105 @@
 {% include "./header.html" with title="Create Event" %}
 {% load widget_tweaks %}
 
+<!-- TODO: Vendor -->
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/pell/dist/pell.min.css">
+
 <body>
     <main class="container">
-        <h1 class="party-title">Make a Smol Party</h1>
-
         <article class="boxy">
 
-        <form method="post">
+            <form method="post">
 
-            {{ form.non_field_errors }}
-            {% csrf_token %}
+                {{ form.non_field_errors }}
+                {% csrf_token %}
 
-            {{ form.title.errors }}
-            {% render_field form.title class+="borderless party-title" placeholder="Smol Party Title" %}
+                {{ form.title.errors }}
+                {% render_field form.title class+="borderless party-title" placeholder="Smol Party Title" %}
+                {{ form.tagline.errors }}
+                {% render_field form.tagline class+="borderless party-tagline" placeholder="A dope tagline for your smol party" %}
 
-            {{ form.tagline.errors }}
-            {% render_field form.tagline class+="borderless party-tagline" placeholder="A dope tagline for your smol party" %}
 
-            {{ form.description.errors }}
-            {% render_field form.description placeholder="Put a description of your smol party here." %}
+                <div class="fieldWrapper">
+                    {{ form.description.errors }}
+                    <label for="{{ form.end_time.id_for_label }}">
+                        <span class="party-detail">Description</span>
+                    </label>
+                    <div id="editor" class="boxy"></div>
+                    {% render_field form.description placeholder="" class+="hidden" %}
+                </div>
+                <br>
 
-            <div class="grid">
-            <div class="fieldWrapper">
-                {{ form.start_time.errors }}
-                <label for="{{ form.start_time.id_for_label }}">
-                    <span class="party-detail">From</span>
-                    {% render_field form.start_time %}
-                </label>
-            </div>
+                <div class="grid">
+                    <div class="fieldWrapper">
+                        {{ form.start_time.errors }}
+                        <label for="{{ form.start_time.id_for_label }}">
+                            <span class="party-detail">From</span>
+                        </label>
+                        {% render_field form.start_time class+="boxy" %}
+                    </div>
 
-            <div class="fieldWrapper">
-                {{ form.end_time.errors }}
-                <label for="{{ form.end_time.id_for_label }}">
-                    <span class="party-detail">Until</span>
-                    {% render_field form.end_time %}
-                </label>
-            </div>
-            </div>
+                    <div class="fieldWrapper">
+                        {{ form.end_time.errors }}
+                        <label for="{{ form.end_time.id_for_label }}">
+                            <span class="party-detail">Until</span>
+                        </label>
+                        {% render_field form.end_time class+="boxy" %}
+                    </div>
+                </div>
 
-            <div class="fieldWrapper">
-                {{ form.location.errors }}
-                <label for="{{ form.location.id_for_label }}">
-                    <span class="party-detail">Location</span>
-                    {% render_field form.location %}
-                </label>
-            </div>
-            <div id="location-preview" style="width: 100%"></div>
-            <p></p>
-            <input type="submit" class="contrast" value="Submit">
-        </form>
+                <div class="fieldWrapper">
+                    {{ form.location.errors }}
+                    <label for="{{ form.location.id_for_label }}">
+                        <span class="party-detail">Location</span>
+                    </label>
+                    {% render_field form.location class+="boxy" %}
+                    <div id="location-preview" style="width: 100%"></div>
+                </div>
+                <p></p>
+                <input type="submit" class="contrast" value="Submit">
+            </form>
         </article>
     </main>
+
+    <!-- TODO: Vendor -->
+    <script src="https://unpkg.com/pell"></script>
+
+    <!-- TODO: Move to own js file. -->
     <script>
-        document.getElementById("id_location").addEventListener("input", function(e) {
+        // Setup the location preview.
+        document.getElementById("id_location").addEventListener("input", function (e) {
             var mapsUrl = "https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=" + encodeURIComponent(e.target.value) + "&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed";
             var embedHtml = '<iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="' + mapsUrl + '"></iframe></div>';
             document.getElementById("location-preview").innerHTML = embedHtml;
         });
+
+        // Setup the editor.
+        const editor = pell.init({
+            element: document.getElementById('editor'),
+            onChange: html => {
+                document.getElementById('id_description').textContent = html
+            },
+            styleWithCSS: true,
+            actions: [
+                'bold',
+                'underline',
+                'italic',
+                'strikethrough',
+                'heading1',
+                'heading2',
+                'line',
+                'olist',
+                'ulist',
+                'quote',
+                'image',
+                'link',
+            ],
+            // Define the content class differently or else the unset breaks things.
+            classes: {
+                content: '_pell-content',
+            }
+        })
+
+        editor.content.innerHTML = 'Put a description of your smol party here.'
     </script>
 </body>
