@@ -60,14 +60,22 @@
 }
 
 /* Revert all of the styling done by the pico framework to any of the elements
- * used for pell (except "_pell-content" which we want the style for).
- * TBH, I didn't even know CSS could do this. */
+ * used for pell (except "pell-content" which we want the style for and re-class
+ * as "party-description").
+ *
+ * TBH, I didn't even know CSS could do this and its kinda sick. */
 * [class^="pell-"] {
   all: revert;
 }
 
-._pell-content {
+.party-description {
   min-height: 15rem;
+  padding: 5px;
+}
+
+.party-description :is(h1, h2, h3, h4, h5, h6) {
+  margin-bottom: unset;
+  font-family: "Lobster", serif;
 }
 
 .hidden {
