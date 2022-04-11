@@ -104,5 +104,7 @@
                 content: 'party-description',
             }
         })
+        // If there's already some content (the form us being used for an update), set it.
+        editor.content.innerHTML = document.getElementById('id_description').textContent;
     </script>
 </body>

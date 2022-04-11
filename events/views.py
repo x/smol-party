@@ -10,6 +10,16 @@ class DetailView(generic.DetailView):
     model = Event
     template_name = "events/detail.html"
 
+class CreateOrUpdateView(generic.UpdateView):
+    # This override lets us use the UpdateView as both a CreateView and an UpdateView.
+    # See: https://stackoverflow.com/a/48116803
+    def get_object(self, queryset=None):
+        print(queryset)
+        try:
+            return super().get_object(queryset)
+        except AttributeError:
+            return None
+
 
 class CreateRSVPView(generic.CreateView):
     model = RSVP
@@ -33,14 +43,14 @@ class CreateRSVPView(generic.CreateView):
         return reverse("events:detail", kwargs={"pk": event_id})
 
 
-class CreateEventView(generic.CreateView):
+class CreateUpdateEventView(CreateOrUpdateView):
     model = Event
     fields = "__all__"
 
     def get_form(self):
-        form = super(CreateEventView, self).get_form()
-        form.fields["start_time"].widget = DateTimeInput(attrs={"type": "datetime-local"})
-        form.fields["end_time"].widget = DateTimeInput(attrs={"type": "datetime-local"})
+        form = super(CreateUpdateEventView, self).get_form()
+        form.fields["start_time"].widget = DateTimeInput(attrs={"type": "datetime-local"}, format=('%Y-%m-%dT%H:%M'))
+        form.fields["end_time"].widget = DateTimeInput(attrs={"type": "datetime-local"}, format=('%Y-%m-%dT%H:%M'))
         # Set the description to not be "required" because we're hiding it in the template. This raises issues in Safari.
         form.fields["description"].required = False
         return form
