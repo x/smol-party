@@ -34,7 +34,10 @@ if os.path.isfile(env_file):
 if LOCAL:
     logging.info("No GOOGLE_CLOUD_PROJECT set; I assume we're running local and will use sqllite")
     DEBUG = True
-    placeholder = f"SECRET_KEY=a\n" f"DATABASE_URL=sqlite://{os.path.join(BASE_DIR, 'db.sqlite3')}"
+    placeholder = (
+        f"SECRET_KEY=not-so-secret\n"
+        f"DATABASE_URL=sqlite://{os.path.join(BASE_DIR, 'db.sqlite3')}"
+    )
     env.read_env(io.StringIO(placeholder))
 
 else:
@@ -134,3 +137,6 @@ STATICFILES_DIRS = []
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Keep sessions running for 100 years
+SESSION_COOKIE_AGE = 315360000

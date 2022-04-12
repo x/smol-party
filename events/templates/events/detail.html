@@ -4,6 +4,10 @@
 
 <body>
 	<main class="container">
+		<!-- Check if the user has stored the correct secret in their session to show this button -->
+		{% if is_owner %}
+			<div  style="text-align:right"><a href="{% url 'events:update' event.id %}?secret={{ event.secret }}" class="secondary" data-tooltip="Only you can see this">Edit {{ event.title }}</a></div>
+		{% endif %}
 		<article class="boxy">
 			<hgroup>
 				<h1 class="party-title">{{ event.title }}</h1>
