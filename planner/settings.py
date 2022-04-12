@@ -137,3 +137,6 @@ STATICFILES_DIRS = []
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Keep sessions running for 100 years
+SESSION_COOKIE_AGE = 315360000
