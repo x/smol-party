@@ -63,6 +63,9 @@ migrate:
 collectstatic:
 	poetry run python manage.py collectstatic
 
+createsuperuser:
+	poetry run python manage.py createsuperuser
+
 runserver:
 	poetry run python manage.py runserver
 
