@@ -2,42 +2,56 @@
 <html lang="en">
 
 <head>
-<!-- TODO this is copy-pasted from the events app header.html -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Smol Party</title>
-  {% load static %}
-  <!-- TODO: vendor me -->
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+    <!-- TODO this is copy-pasted from the events app header.html -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smol Party</title>
+    {% load static %}
+    <!-- TODO: vendor me -->
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 
-  <!-- Custom -->
-  <link rel="stylesheet" type="text/css" href="{% static 'events/style.css' %}">
+    <!-- Custom -->
+    <link rel="stylesheet" type="text/css" href="{% static 'events/style.css' %}">
 
-  <!-- Force light-mode -->
-  <html data-theme="light">
+    <!-- Force light-mode -->
+    <html data-theme="light">
+
+    <!-- Metatags for Link Unfurling -->
+    <!-- facebook open graph tags -->
+    <meta property="og:site_name" content="Smol Party" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Smol Party 🎉" />
+    <meta property="og:description" content="A smol party planning and rsvp app." />
+
+    <!-- twitter card tags additive with the og: tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" value="smol.party" />
+    <meta name="twitter:title" value="Smol Party 🎉" />
+    <meta name="twitter:description" value="A smol party planning and rsvp app." />
+
 </head>
 
 <body>
     <main class="container">
         <article class="boxy">
-        <h1 class="party-title"><u>Smol.Party</u></h1>
-        <p>
-            <b>Smol.Party</b> is a simple app to create and collect RSVPs to events in as low-touch
-            a method as possible.
-        </p>
-        <p>
-            Ideally it's an alternative to Facebook Events.
-        </p>
-        <p>
-            It's written by <a href="http://peticol.as">me</a>, is a work in progress, and will
-            probably break if you try to break it. If you'd like to make it better, please
-            <a href="https://github.com/x/smol-party">submit a pull request</a>.
-        </p>
-        <div class="grid">
-            <a href="{% url 'events:create' %}" role="button" class="contrast">Create a new Event</a>
-        </div>
-    </article>
+            <h1 class="party-title"><u>Smol.Party</u></h1>
+            <p>
+                <b>Smol.Party</b> is a simple app to create and collect RSVPs to events in as low-touch
+                a method as possible.
+            </p>
+            <p>
+                Ideally it's an alternative to Facebook Events.
+            </p>
+            <p>
+                It's written by <a href="http://peticol.as">me</a>, is a work in progress, and will
+                probably break if you try to break it. If you'd like to make it better, please
+                <a href="https://github.com/x/smol-party">submit a pull request</a>.
+            </p>
+            <div class="grid">
+                <a href="{% url 'events:create' %}" role="button" class="contrast">Create a new Event</a>
+            </div>
+        </article>
 
     </main>
 </body>
