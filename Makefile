@@ -76,7 +76,7 @@ up: runserver
 format:
 	poetry run black .
 	poetry run isort .
-
+	poetry run djlint . --reformat
 
 # Linting
 lint:

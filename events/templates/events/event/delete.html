@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+    {% include "../header.html" with title="Delete Smol Party" %}
+    {% load widget_tweaks %}
+    <body>
+        <main class="container">
+            <article class="boxy">
+                <form method="post">
+                    {% csrf_token %}
+                    <p>
+                        Are you sure you wish to delete "{{ event.title }}"? <b>This can not be undone.</b>
+                    </p>
+                    <input type="submit" value="Confirm" class="contrast"/>
+                </form>
+            </article>
+        </main>
+    </body>
+</html>

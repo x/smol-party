@@ -1,17 +1,9 @@
-import hashlib
 import uuid
 from urllib.parse import quote
 
-from django.conf import settings
 from django.db import models
 
-
-class SecretHashMixin:
-    def secret(self) -> str:
-        _id = self.id  # type: ignore
-        sha256 = hashlib.new("sha256")
-        sha256.update(str(_id).encode("utf-8") + settings.SECRET_KEY.encode("utf-8"))
-        return sha256.hexdigest()
+from .secret_utils import SecretMixin
 
 
 class TimeStampMixin(models.Model):
@@ -22,7 +14,7 @@ class TimeStampMixin(models.Model):
         abstract = True
 
 
-class Event(TimeStampMixin, SecretHashMixin):
+class Event(TimeStampMixin, SecretMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=256)
     tagline = models.CharField(max_length=256)
@@ -72,7 +64,7 @@ class Event(TimeStampMixin, SecretHashMixin):
         return f"https://maps.apple.com/maps?q={quote(self.location)}"
 
 
-class RSVP(TimeStampMixin):
+class RSVP(TimeStampMixin, SecretMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     name = models.CharField(max_length=60)
