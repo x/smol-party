@@ -42,7 +42,7 @@
                         </div>
                     </p>
                     <div class="grid">
-                        {% if event.id|safe in request.session %}
+                        {% if is_rsvped %}
                             <a role="button" class="contrast bump outline">You're RSVP'd!</a>
                         {% else %}
                             <a href="{% url 'events:rsvp' event.id %}"

@@ -54,10 +54,27 @@ class EventDetailView(generic.DetailView):
                 rsvp_ids.append(rsvp_id)
         return rsvp_ids
 
+    def is_rsvped(self) -> bool:
+        """Determine if the user owns an active RSVP."""
+        owned_rsvp_ids = self.owned_rsvp_ids()
+        all_rsvp_ids = [str(rsvp.id) for rsvp in self.object.rsvp_set.all()]
+
+        # New method for checking if the user has an active RSVP.
+        for rsvp_id in all_rsvp_ids:
+            if rsvp_id in owned_rsvp_ids:
+                return True
+
+        # For backwards compatibility with the old method.
+        if self.request.session.get(str(self.object.id)) in all_rsvp_ids:
+            return True
+
+        return False
+
     def get_context_data(self, *args, **kwargs):
         context = super(EventDetailView, self).get_context_data(*args, **kwargs)
         context["is_event_owner"] = self.is_event_owner()
         context["owned_rsvp_ids"] = self.owned_rsvp_ids()
+        context["is_rsvped"] = self.is_rsvped()
         return context
 
 
@@ -112,16 +129,15 @@ class CreateUpdateRSVPView(CreateOrUpdateView):
         form.instance.event_id = self.kwargs["event_id"]
         return super().form_valid(form)
 
-    def set_created_rsvp(self) -> None:
-        """Store the rsvp_id in the session with the event_id as the key so we know we've RSVP'd."""
+    def set_rsvp_owner(self) -> None:
+        """Store the rsvp_id in the session with the event_id and secret so we know we've RSVP'd."""
         event_id = self.kwargs["event_id"]
         rsvp_id = self.object.id
-        # TODO: Someday replace this key with "{event_id}_rsvp_id".
-        self.request.session[str(event_id)] = str(rsvp_id)
+        self.request.session[f"{event_id}_{rsvp_id}_rsvp_secret"] = self.object.secret()
 
     def get_success_url(self):
         """Set that this event was RSVP'd by this user and redirect to the event detail page."""
-        self.set_created_rsvp()
+        self.set_rsvp_owner()
         return reverse("events:detail", kwargs={"pk": self.kwargs["event_id"]})
 
     def get_context_data(self, *args, **kwargs):
