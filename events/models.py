@@ -22,6 +22,9 @@ class Event(TimeStampMixin, SecretMixin):
     start_time = models.DateTimeField("from")
     end_time = models.DateTimeField("until")
     location = models.CharField(max_length=256)
+    has_confetti = models.BooleanField(default=False)
+    confetti_emojis = models.CharField(max_length=256, default="")
+    confetti_amount = models.IntegerField(default=100)
 
     def __str__(self):
         return f"{self.title} ({self.start_time})"
