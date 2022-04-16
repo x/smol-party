@@ -50,7 +50,7 @@
 					<ul>
 						{% for rsvp in event.rsvp_set.all %}
 						{% if rsvp.id|safe in owned_rsvp_ids %}
-						<li><b>{{ rsvp.name }}</b> is attending <small>(<a href="{% url 'events:rsvp_update' event.id rsvp.id %}?secret={{ rsvp.secret }}">edit</a>, <a href="{% url 'events:rsvp_delete' event.id rsvp.id %}?secret={{ rsvp.secret }}">delete</a>)</small></li>
+						<li><b>{{ rsvp.name }}</b> is attending <small>(<a href="{% url 'events:rsvp_update' event.id rsvp.id %}?secret={{ rsvp.secret }}">edit</a>)</small></li>
 						{% else %}
 						<li><b>{{ rsvp.name }}</b> is attending</li>
 						{% endfor %}
