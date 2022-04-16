@@ -58,7 +58,13 @@
                     <div id="location-preview"></div>
                 </div>
                 <p></p>
-                <input type="submit" class="contrast" value="Submit">
+                {% if object %}
+                    <input type="submit" class="contrast" value="Update Party">
+                    <hr>
+                    <center><small>Or, <a href="{% url 'events:delete' event.id %}?secret={{ event.secret }}" class="contrast">click here</a> to delete your party.</small></center>
+                {% else %}
+                    <input type="submit" class="contrast" value="Create Party">
+                {% endif %}
             </form>
         </article>
     </main>

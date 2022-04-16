@@ -61,8 +61,49 @@ class EventDetailView(generic.DetailView):
         return context
 
 
+class CreateUpdateEventView(CreateOrUpdateView):
+    model = Event
+    fields = "__all__"
+    template_name = "events/event/create_update.html"
 
-class CreateRSVPView(generic.CreateView):
+    def get_form(self):
+        form = super(CreateUpdateEventView, self).get_form()
+        form.fields["start_time"].widget = DateTimeInput(
+            attrs={"type": "datetime-local"}, format=("%Y-%m-%dT%H:%M")
+        )
+        form.fields["end_time"].widget = DateTimeInput(
+            attrs={"type": "datetime-local"}, format=("%Y-%m-%dT%H:%M")
+        )
+        # Set the description to not be "required" because we're hiding it in the template. This raises issues in Safari.
+        form.fields["description"].required = False
+        return form
+
+    def set_event_owner(self) -> None:
+        """Set the secret for the event to the session. This way we can confirm
+        that the user is the owner of the event later."""
+        self.request.session[f"{self.object.id}_event_secret"] = self.object.secret()
+
+    def get_success_url(self):
+        """Set that this event was created by this user and redirect to the event detail page."""
+        self.set_event_owner()
+        return reverse("events:detail", kwargs={"pk": self.object.id})
+
+
+class DeleteEventView(generic.DeleteView):
+    model = Event
+    template_name = "events/event/delete.html"
+    success_url = "/"
+
+    def get_object(self, queryset=None):
+        object = super().get_object(queryset)
+        # Confirm they're allowed to delete the object via the "secret" param.
+        if self.request.GET.get("secret") == object.secret():
+            return object
+        else:
+            raise PermissionDenied
+
+
+class CreateUpdateRSVPView(CreateOrUpdateView):
     model = RSVP
     fields = ["name"]
     template_name = "events/rsvp/create_update.html"
@@ -109,30 +150,3 @@ class DeleteRSVPView(generic.DeleteView):
         context["event"] = Event.objects.get(pk=self.kwargs["event_id"])
         return context
 
-
-class CreateUpdateEventView(CreateOrUpdateView):
-    model = Event
-    fields = "__all__"
-    template_name = "events/event/create_update.html"
-
-    def get_form(self):
-        form = super(CreateUpdateEventView, self).get_form()
-        form.fields["start_time"].widget = DateTimeInput(
-            attrs={"type": "datetime-local"}, format=("%Y-%m-%dT%H:%M")
-        )
-        form.fields["end_time"].widget = DateTimeInput(
-            attrs={"type": "datetime-local"}, format=("%Y-%m-%dT%H:%M")
-        )
-        # Set the description to not be "required" because we're hiding it in the template. This raises issues in Safari.
-        form.fields["description"].required = False
-        return form
-
-    def set_event_owner(self) -> None:
-        """Set the secret for the event to the session. This way we can confirm
-        that the user is the owner of the event later."""
-        self.request.session[f"{self.object.id}_event_secret"] = self.object.secret()
-
-    def get_success_url(self):
-        """Set that this event was created by this user and redirect to the event detail page."""
-        self.set_event_owner()
-        return reverse("events:detail", kwargs={"pk": self.object.id})

@@ -6,7 +6,7 @@
 <body>
     <main class="container">
         <article class="boxy">
-        <h1 class="party-title">RSVP to <u>{{ event.title }}</u></h1>
+            <h1 class="party-title">RSVP to <u>{{ event.title }}</u></h1>
             <form method="post">
                 {% csrf_token %}
                 <div class="fieldWrapper">
@@ -16,7 +16,14 @@
                     </label>
                     {% render_field form.name class+="boxy" %}
                 </div>
+
+                {% if object %}
+                <input type="submit" class="contrast" value="Update">
+                <hr>
+                <center><small>Or, <a href="{% url 'events:rsvp_delete' event.id rsvp.id %}?secret={{ rsvp.secret }}" class="contrast">click here</a> to delete your RSVP.</small></center>
+                {% else %}
                 <input type="submit" class="contrast" value="Submit">
+                {% endif %}
             </form>
         </article>
     </main>
