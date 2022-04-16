@@ -14,5 +14,11 @@ urlpatterns = [
     # ex: /123/update/
     path("<shortuuid:pk>/update/", views.CreateUpdateEventView.as_view(), name="update"),
     # ex: /123/rsvp/
-    path("<shortuuid:event_id>/rsvp/", views.CreateRSVPView.as_view(), name="rsvp"),
+    path("<shortuuid:event_id>/rsvp/", views.CreateUpdateRSVPView.as_view(), name="rsvp"),
+    # ex: /123/rsvp/456/update
+    path(
+        "<shortuuid:event_id>/rsvp/<shortuuid:pk>/",
+        views.CreateUpdateRSVPView.as_view(),
+        name="rsvp_update",
+    ),
 ]

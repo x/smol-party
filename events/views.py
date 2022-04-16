@@ -1,9 +1,15 @@
+import re
+from typing import List
+
 from django.core.exceptions import PermissionDenied
 from django.forms.widgets import DateTimeInput
 from django.urls import reverse
 from django.views import generic
 
 from .models import RSVP, Event
+from .secret_utils import secret_is_correct
+
+UUID_36_REGEX = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
 
 
 class CreateOrUpdateView(generic.UpdateView):
@@ -36,10 +42,24 @@ class EventDetailView(generic.DetailView):
         """Determine, based on the session, if the user is the owner of the event."""
         return self.object.secret() == self.request.session.get(f"{self.object.id}_event_secret")
 
+    def owned_rsvp_ids(self) -> List[str]:
+        """Return the RSVP IDs for the user and confirm they own them by
+        checking the secret. A user should only have one of these but..."""
+        rsvp_ids = []
+        for key, rsvp_secret in self.request.session.items():
+            if not re.match(f"^{UUID_36_REGEX}_{UUID_36_REGEX}_rsvp_secret$", key):
+                continue
+            event_id, rsvp_id, _ = key.split("_", maxsplit=2)
+            if event_id == str(self.object.id) and secret_is_correct(rsvp_id, rsvp_secret):
+                rsvp_ids.append(rsvp_id)
+        return rsvp_ids
+
     def get_context_data(self, *args, **kwargs):
         context = super(EventDetailView, self).get_context_data(*args, **kwargs)
-        context["is_owner"] = self.is_event_owner()
+        context["is_event_owner"] = self.is_event_owner()
+        context["owned_rsvp_ids"] = self.owned_rsvp_ids()
         return context
+
 
 
 class CreateRSVPView(generic.CreateView):
@@ -61,6 +81,11 @@ class CreateRSVPView(generic.CreateView):
         """Set that this event was RSVP'd by this user and redirect to the event detail page."""
         self.set_created_rsvp()
         return reverse("events:detail", kwargs={"pk": self.kwargs["event_id"]})
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CreateUpdateRSVPView, self).get_context_data(*args, **kwargs)
+        context["event"] = Event.objects.get(pk=self.kwargs["event_id"])
+        return context
 
 
 class CreateUpdateEventView(CreateOrUpdateView):
