@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-{% include "./header.html" with title=event.title description=event.tagline label1="When" data1=event.start_time label2="Where" data2=event.location %}
+{% include "../header.html" with title=event.title description=event.tagline label1="When" data1=event.start_time label2="Where" data2=event.location %}
 
 
 <body>
@@ -69,6 +69,18 @@
 	</main>
 </body>
 
-{% include "./footer.html" %}
+{% include "../footer.html" %}
+<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+<script>
+	//const canvas = document.getElementById('canvas')
+	//const jsConfetti = new JSConfetti({ canvas })
+	
+	const jsConfetti = new JSConfetti()
+	jsConfetti.addConfetti({
+   		//emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸', '🪬'],
+		confettiNumber: 100,
+	})
+
+</script>
 
 </html>

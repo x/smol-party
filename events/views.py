@@ -36,7 +36,7 @@ class CreateOrUpdateView(generic.UpdateView):
 
 class EventDetailView(generic.DetailView):
     model = Event
-    template_name = "events/detail.html"
+    template_name = "events/event/detail.html"
 
     def is_event_owner(self) -> bool:
         """Determine, based on the session, if the user is the owner of the event."""
@@ -65,6 +65,7 @@ class EventDetailView(generic.DetailView):
 class CreateRSVPView(generic.CreateView):
     model = RSVP
     fields = ["name"]
+    template_name = "events/rsvp/create_update.html"
 
     def form_valid(self, form):
         form.instance.event_id = self.kwargs["event_id"]
@@ -91,6 +92,7 @@ class CreateRSVPView(generic.CreateView):
 class CreateUpdateEventView(CreateOrUpdateView):
     model = Event
     fields = "__all__"
+    template_name = "events/event/create_update.html"
 
     def get_form(self):
         form = super(CreateUpdateEventView, self).get_form()
