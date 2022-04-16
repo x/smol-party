@@ -17,8 +17,13 @@ urlpatterns = [
     path("<shortuuid:event_id>/rsvp/", views.CreateUpdateRSVPView.as_view(), name="rsvp"),
     # ex: /123/rsvp/456/update
     path(
-        "<shortuuid:event_id>/rsvp/<shortuuid:pk>/",
+        "<shortuuid:event_id>/rsvp/<shortuuid:pk>/update/",
         views.CreateUpdateRSVPView.as_view(),
         name="rsvp_update",
+    ),
+    path(
+        "<shortuuid:event_id>/rsvp/<shortuuid:pk>/delete/",
+        views.DeleteRSVPView.as_view(),
+        name="rsvp_delete",
     ),
 ]

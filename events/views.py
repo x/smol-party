@@ -89,6 +89,27 @@ class CreateRSVPView(generic.CreateView):
         return context
 
 
+class DeleteRSVPView(generic.DeleteView):
+    model = RSVP
+    template_name = "events/rsvp/delete.html"
+
+    def get_object(self, queryset=None):
+        object = super().get_object(queryset)
+        # Confirm they're allowed to delete the object via the "secret" param.
+        if self.request.GET.get("secret") == object.secret():
+            return object
+        else:
+            raise PermissionDenied
+
+    def get_success_url(self):
+        return reverse("events:detail", kwargs={"pk": self.kwargs["event_id"]})
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(DeleteRSVPView, self).get_context_data(*args, **kwargs)
+        context["event"] = Event.objects.get(pk=self.kwargs["event_id"])
+        return context
+
+
 class CreateUpdateEventView(CreateOrUpdateView):
     model = Event
     fields = "__all__"
