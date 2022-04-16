@@ -1,32 +1,32 @@
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ title }}</title>
-  {% load static %}
-  <!-- TODO: vendor me -->
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
-
-  <!-- Custom -->
-  <link rel="stylesheet" type="text/css" href="{% static 'events/style.css' %}">
-
-  <!-- Force light-mode -->
-  <html data-theme="light">
-
-  <!-- Metatags for Link Unfurling -->
-  <!-- facebook open graph tags -->
-  <meta property="og:site_name" content="Smol Party" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="{{ title }}" />
-  <meta property="og:description" content="{{ description }}" />
-
-  <!-- twitter card tags additive with the og: tags -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:domain" value="smol.party" />
-  <meta name="twitter:title" value="{{ title }}" />
-  <meta name="twitter:description" value="{{ description }}" />
-  <meta name="twitter:label1" value="{{ label1 }}" />
-  <meta name="twitter:data1" value="{{ data1 }}" />
-  <meta name="twitter:label2" value="{{ label2 }}" />
-  <meta name="twitter:data2" value="{{ data2 }}" />
-</head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{{ title }}</title>
+    {% load static %}
+    <!-- TODO: vendor me -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lobster"/>
+    <!-- Custom -->
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'events/style.css' %}"/>
+    <!-- Force light-mode -->
+    <html data-theme="light">
+        <!-- Metatags for Link Unfurling -->
+        <!-- facebook open graph tags -->
+        <meta property="og:site_name" content="Smol Party" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="{{ title }}" />
+        <meta property="og:description" content="{{ description }}" />
+        <!-- twitter card tags additive with the og: tags -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:domain" value="smol.party" />
+        <meta name="twitter:title" value="{{ title }}" />
+        <meta name="twitter:description" value="{{ description }}" />
+        <meta name="twitter:label1" value="{{ label1 }}" />
+        <meta name="twitter:data1" value="{{ data1 }}" />
+        <meta name="twitter:label2" value="{{ label2 }}" />
+        <meta name="twitter:data2" value="{{ data2 }}" />
+    </head>

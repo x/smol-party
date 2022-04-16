@@ -149,4 +149,3 @@ class DeleteRSVPView(generic.DeleteView):
         context = super(DeleteRSVPView, self).get_context_data(*args, **kwargs)
         context["event"] = Event.objects.get(pk=self.kwargs["event_id"])
         return context
-

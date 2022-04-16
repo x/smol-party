@@ -1,30 +1,31 @@
 <!doctype html>
 <html lang="en">
-{% include "../header.html" with title=event.title %}
-{% load widget_tweaks %}
-
-<body>
-    <main class="container">
-        <article class="boxy">
-            <h1 class="party-title">RSVP to <u>{{ event.title }}</u></h1>
-            <form method="post">
-                {% csrf_token %}
-                <div class="fieldWrapper">
-                    {{ form.name.errors }}
-                    <label for="{{ form.location.id_for_label }}">
-                        <span class="party-detail">Your Name</span>
-                    </label>
-                    {% render_field form.name class+="boxy" %}
-                </div>
-
-                {% if object %}
-                <input type="submit" class="contrast" value="Update">
-                <hr>
-                <center><small>Or, <a href="{% url 'events:rsvp_delete' event.id rsvp.id %}?secret={{ rsvp.secret }}" class="contrast">click here</a> to delete your RSVP.</small></center>
-                {% else %}
-                <input type="submit" class="contrast" value="Submit">
-                {% endif %}
-            </form>
-        </article>
-    </main>
-</body>
+    {% include "../header.html" with title="RSVP to Smol Party" %}
+    {% load widget_tweaks %}
+    <body>
+        <main class="container">
+            <article class="boxy">
+                <h1 class="party-title">
+                    RSVP to <u>{{ event.title }}</u>
+                </h1>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="fieldWrapper">
+                        {{ form.name.errors }}
+                        <label for="{{ form.location.id_for_label }}">
+                            <span class="party-detail">Your Name</span>
+                        </label>
+                        {% render_field form.name class+="boxy" %}
+                    </div>
+                    {% if object %}
+                        <input type="submit" class="contrast" value="Update">
+                        <hr>
+                        <center><small>Or, <a href="{% url 'events:rsvp_delete' event.id rsvp.id %}?secret={{ rsvp.secret }}"
+    class="contrast">click here</a> to delete your RSVP.</small></center>
+                    {% else %}
+                        <input type="submit" class="contrast" value="Submit">
+                    {% endif %}
+                </form>
+            </article>
+        </main>
+    </body>

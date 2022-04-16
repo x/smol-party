@@ -1,7 +1,6 @@
 import uuid
 from urllib.parse import quote
 
-from django.conf import settings
 from django.db import models
 
 from .secret_utils import SecretMixin

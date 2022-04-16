@@ -19,6 +19,7 @@ black = { version = "20.8b1", allow-prereleases = true }
 isort = "^5"
 flake8 = "^4"
 mypy = "^0.942"
+djlint = "^0.7.6"
 
 # Pinning to fix a temporary issue with black: https://github.com/psf/black/issues/2964
 click = "<=8.0.4"
