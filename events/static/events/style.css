@@ -1,3 +1,42 @@
+/* Pink Light scheme (Default) */
+/* Can be forced with data-theme="light" */
+[data-theme="light"],
+:root:not([data-theme="dark"]) {
+  --primary: #d81b60;
+  --primary-hover: #c2185b;
+  --primary-focus: rgba(216, 27, 96, 0.125);
+  --primary-inverse: #FFF;
+}
+
+/* Pink Dark scheme (Auto) */
+/* Automatically enabled if user has Dark mode enabled */
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+	--primary: #d81b60;
+	--primary-hover: #e91e63;
+	--primary-focus: rgba(216, 27, 96, 0.25);
+	--primary-inverse: #FFF;
+  }
+}
+
+/* Pink Dark scheme (Forced) */
+/* Enabled if forced with data-theme="dark" */
+[data-theme="dark"] {
+  --primary: #d81b60;
+  --primary-hover: #e91e63;
+  --primary-focus: rgba(216, 27, 96, 0.25);
+  --primary-inverse: #FFF;
+}
+
+/* Pink (Common styles) */
+:root {
+  --form-element-active-border-color: var(--primary);
+  --form-element-focus-color: var(--primary-focus);
+  --switch-color: var(--primary-inverse);
+  --switch-checked-background-color: var(--primary);
+}
+
+
 .rsvps ul {
   padding-left: 0;
 }
@@ -10,9 +49,37 @@
   content: "☑ ";
 }
 
-.boxy {
-  margin: unset;
-  border: 5px solid black;
+
+input {
+  border: 1px solid black;
+  border-radius: 0px;
+  box-shadow: 8px 8px 0px black;
+}
+
+input[type=submit] {
+  border: 1px solid black;
+  border-radius: 0px;
+  box-shadow: 8px 8px 0px black;
+}
+
+
+article {
+  border: 1px solid black;
+  border-radius: 0px;
+  box-shadow: 8px 8px 0px black;
+  /*box-shadow: rgba(0, 0, 0, 0.4) 8px 8px, rgba(0, 0, 0, 0.3) 16px 16px, rgba(0, 0, 0, 0.2) 24px 24px, rgba(0, 0, 0, 0.1) 32px 32px, rgba(0, 0, 0, 0.05) 40px 40px;
+  /*box-shadow: blue 0px 0px 0px 2px inset, rgb(255, 255, 255) 8px -8px 0px -3px, rgb(31, 193, 27) 8px -8px, rgb(255, 255, 255) 16px -16px 0px -3px, rgb(255, 217, 19) 16px -16px, rgb(255, 255, 255) 24px -24px 0px -3px, rgb(255, 156, 85) 24px -24px, rgb(255, 255, 255) 32px -32px 0px -3px, rgb(255, 85, 85) 32px -32px;*/
+}
+
+iframe {
+  border: 1px solid black;
+  box-shadow: 8px 8px 0px black;
+}
+
+a[role=button] {
+  border-radius: 0px;
+  box-shadow: 8px 8px 0px black;
+  margin-bottom: 16px;
 }
 
 .party-title {
@@ -42,16 +109,13 @@
   font-weight: bold;
 }
 
-.bump {
-  margin-bottom: 5px;
-}
-
 .borderless {
   border-top-style: hidden;
   border-right-style: hidden;
   border-left-style: hidden;
   border-bottom-style: groove;
   border-width: 0px;
+  box-shadow: 0px 0px 0px;
   /* Somewhere out there someone who knows CSS is crying */
   height: unset !important;
 }
@@ -70,6 +134,17 @@
   all: revert;
 }
 
+.pell-actionbar {
+  border-bottom: 1px solid black !important;
+  background-color: unset !important;
+}
+
+
+#editor {
+  border: 1px solid black;
+  border-radius: 0px;
+  box-shadow: 8px 8px 0px black;
+}
 
 #editor .party-description {
   min-height: 12rem;

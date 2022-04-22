@@ -20,7 +20,7 @@
               type="text/css"
               href="{% static 'events/style.css' %}">
         <!-- Force light-mode -->
-        <html data-theme="light">
+        <html data-theme="dark">
             <!-- Metatags for Link Unfurling -->
             <!-- facebook open graph tags -->
             <meta property="og:site_name" content="Smol Party" />
@@ -37,7 +37,7 @@
         </head>
         <body>
             <main class="container">
-                <article class="boxy">
+                <article>
                     <h1 class="party-title">
                         <u>Smol.Party</u>
                     </h1>
@@ -51,7 +51,7 @@
                 <a href="https://github.com/x/smol-party">submit a pull request</a>.
         </p>
         <div class="grid">
-            <a href="{% url 'events:create' %}" role="button" class="contrast">Create a new Event</a>
+            <a href="{% url 'events:create' %}" role="button">Create a new Event</a>
         </div>
     </article>
 </main>

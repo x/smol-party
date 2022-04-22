@@ -4,13 +4,13 @@
     {% load widget_tweaks %}
     <body>
         <main class="container">
-            <article class="boxy">
+            <article>
                 <form method="post">
                     {% csrf_token %}
                     <p>
                         Are you sure you want to delete your RSVP to {{ event.title }}?
                     </p>
-                    <input type="submit" value="Confirm" class="contrast"/>
+                    <input type="submit" value="Confirm"/>
                 </form>
             </article>
         </main>

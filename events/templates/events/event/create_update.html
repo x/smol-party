@@ -8,12 +8,12 @@
           href="https://unpkg.com/pell/dist/pell.min.css"/>
     <body>
         <main class="container">
-            <article class="boxy">
+            <article>
                 <form method="post">
                     {{ form.non_field_errors }}
                     {% csrf_token %}
                     {{ form.title.errors }}
-                    {% render_field form.title class+="borderless party-title" placeholder="Smol Party Title" %}
+                    {% render_field form.title class+="borderless party-title" placeholder="Party Title" %}
                     {{ form.tagline.errors }}
                     {% render_field form.tagline class+="borderless party-tagline" placeholder="A dope tagline for your smol party" %}
                     <div class="fieldWrapper">
@@ -21,7 +21,7 @@
                         <label for="{{ form.end_time.id_for_label }}">
                             <span class="party-detail">Description</span>
                         </label>
-                        <div id="editor" class="boxy"></div>
+                        <div id="editor"></div>
                         {% render_field form.description class+="hidden" %}
                     </div>
                     <br />
@@ -31,14 +31,14 @@
                             <label for="{{ form.start_time.id_for_label }}">
                                 <span class="party-detail">From</span>
                             </label>
-                            {% render_field form.start_time class+="boxy" %}
+                            {% render_field form.start_time %}
                         </div>
                         <div class="fieldWrapper">
                             {{ form.end_time.errors }}
                             <label for="{{ form.end_time.id_for_label }}">
                                 <span class="party-detail">Until</span>
                             </label>
-                            {% render_field form.end_time class+="boxy" %}
+                            {% render_field form.end_time %}
                         </div>
                     </div>
                     <div class="fieldWrapper">
@@ -46,17 +46,16 @@
                         <label for="{{ form.location.id_for_label }}">
                             <span class="party-detail">Location</span>
                         </label>
-                        {% render_field form.location class+="boxy" %}
+                        {% render_field form.location %}
                         <div id="location-preview"></div>
                     </div>
                     <br />
                     {% if object %}
-                        <input type="submit" class="contrast" value="Update Party".>
+                        <input type="submit" value="Update Party".>
                         <hr />
-                        <center><small>Or, <a href="{% url 'events:delete' event.id %}?secret={{ event.secret }}"
-    class="contrast">click here</a> to delete your party.</small></center>
+                        <center><small>Or, <a href="{% url 'events:delete' event.id %}?secret={{ event.secret }}">click here</a> to delete your party.</small></center>
                     {% else %}
-                        <input type="submit" class="contrast" value="Create Party"/>
+                        <input type="submit" value="Create Party"/>
                     {% endif %}
                 </form>
             </article>

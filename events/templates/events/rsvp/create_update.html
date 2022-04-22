@@ -4,7 +4,7 @@
     {% load widget_tweaks %}
     <body>
         <main class="container">
-            <article class="boxy">
+            <article>
                 <h1 class="party-title">
                     RSVP to <u>{{ event.title }}</u>
                 </h1>
@@ -15,15 +15,14 @@
                         <label for="{{ form.location.id_for_label }}">
                             <span class="party-detail">Your Name</span>
                         </label>
-                        {% render_field form.name class+="boxy" %}
+                        {% render_field form.name %}
                     </div>
                     {% if object %}
-                        <input type="submit" class="contrast" value="Update">
+                        <input type="submit" value="Update">
                         <hr>
-                        <center><small>Or, <a href="{% url 'events:rsvp_delete' event.id rsvp.id %}?secret={{ rsvp.secret }}"
-    class="contrast">click here</a> to delete your RSVP.</small></center>
+                        <center><small>Or, <a href="{% url 'events:rsvp_delete' event.id rsvp.id %}?secret={{ rsvp.secret }}">click here</a> to delete your RSVP.</small></center>
                     {% else %}
-                        <input type="submit" class="contrast" value="Submit">
+                        <input type="submit" value="Submit">
                     {% endif %}
                 </form>
             </article>
