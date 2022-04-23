@@ -4,13 +4,13 @@
     {% load widget_tweaks %}
     <body>
         <main class="container">
-            <article class="boxy">
+            <article>
                 <form method="post">
                     {% csrf_token %}
                     <p>
                         Are you sure you wish to delete "{{ event.title }}"? <b>This can not be undone.</b>
                     </p>
-                    <input type="submit" value="Confirm" class="contrast"/>
+                    <input type="submit" value="Confirm"/>
                 </form>
             </article>
         </main>

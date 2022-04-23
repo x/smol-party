@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
     {% include "../header.html" with title=event.title description=event.tagline label1="When" data1=event.start_time label2="Where" data2=event.location %}
     <body>
         <main class="container">
@@ -11,7 +11,7 @@
                        data-tooltip="Only you can see this">Edit {{ event.title }}</a>
                 </div>
             {% endif %}
-            <article class="boxy">
+            <article>
                 <hgroup>
                 <h1 class="party-title">{{ event.title }}</h1>
                 <h2 class="party-tagline">{{ event.tagline }}</h2>
@@ -43,19 +43,16 @@
                     </p>
                     <div class="grid">
                         {% if is_rsvped %}
-                            <a role="button" class="contrast bump outline">You're RSVP'd!</a>
+                            <a role="button">You're RSVP'd!</a>
                         {% else %}
                             <a href="{% url 'events:rsvp' event.id %}"
-                               role="button"
-                               class="contrast bump">RSVP Now</a>
+                               role="button">RSVP Now</a>
                         {% endif %}
                         <a role="button"
-                           class="contrast bump"
                            onclick='shareEvent("Smol.Party - {{ event.title }}", "RSVP to this event!", window.location.href)'>Share</a>
                         <a href="{{ event.add_to_gcal_link|safe }}"
-                           role="button"
-                           class="contrast bump">Add to Gcal</a>
-                    </div>
+						   role="button">Add to Gcal</a>
+					</div>
                     <div>
                         <h2 class="party-detail-header">Responses</h2>
                         {{ rsvp_ids }}
