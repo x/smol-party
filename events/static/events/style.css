@@ -51,20 +51,20 @@
 
 
 input {
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 0px;
   box-shadow: 8px 8px 0px black;
 }
 
 input[type=submit] {
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 0px;
   box-shadow: 8px 8px 0px black;
 }
 
 
 article {
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 0px;
   box-shadow: 8px 8px 0px black;
   margin: unset;
@@ -73,7 +73,7 @@ article {
 }
 
 iframe {
-  border: 1px solid black;
+  border: 2px solid black;
   box-shadow: 8px 8px 0px black;
 }
 
@@ -136,13 +136,13 @@ a[role=button] {
 }
 
 .pell-actionbar {
-  border-bottom: 1px solid black !important;
+  border-bottom: 2px solid black !important;
   background-color: unset !important;
 }
 
 
 #editor {
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 0px;
   box-shadow: 8px 8px 0px black;
 }
