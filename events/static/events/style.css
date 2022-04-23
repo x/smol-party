@@ -67,6 +67,7 @@ article {
   border: 1px solid black;
   border-radius: 0px;
   box-shadow: 8px 8px 0px black;
+  margin: unset;
   /*box-shadow: rgba(0, 0, 0, 0.4) 8px 8px, rgba(0, 0, 0, 0.3) 16px 16px, rgba(0, 0, 0, 0.2) 24px 24px, rgba(0, 0, 0, 0.1) 32px 32px, rgba(0, 0, 0, 0.05) 40px 40px;
   /*box-shadow: blue 0px 0px 0px 2px inset, rgb(255, 255, 255) 8px -8px 0px -3px, rgb(31, 193, 27) 8px -8px, rgb(255, 255, 255) 16px -16px 0px -3px, rgb(255, 217, 19) 16px -16px, rgb(255, 255, 255) 24px -24px 0px -3px, rgb(255, 156, 85) 24px -24px, rgb(255, 255, 255) 32px -32px 0px -3px, rgb(255, 85, 85) 32px -32px;*/
 }
