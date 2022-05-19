@@ -49,20 +49,53 @@
   content: "☑ ";
 }
 
+.checkbox_label
+{
+  height:0px;
+  width:0px;
+  display:inline-block;
+  float:left;
+  position:relative;
+  left:20px;
+  z-index:100;
+}
 
+/* Hidable stuff for the "add confetti checkbox. */
+.hidable {
+	height:0px;
+	overflow:hidden;
+  margin-top: 15px;
+}
+
+input:checked ~ .hidable {
+	height: auto;
+}
+
+/* All inputs should look vibey. */
 input {
   border: 2px solid black;
   border-radius: 0px;
   box-shadow: 8px 8px 0px black;
 }
 
+/* Anchor buttons that are in grids but wrapped in divs should be the width of the div. */
+.grid div a {
+  width: 100%;
+}
+
+a[role=button] {
+  border: 2px solid black;
+}
+
+/* Submit buttons should look vibey. */
 input[type=submit] {
   border: 2px solid black;
   border-radius: 0px;
   box-shadow: 8px 8px 0px black;
+  margin-top: 10px;
 }
 
-
+/* Articles should look vibey. */
 article {
   border: 2px solid black;
   border-radius: 0px;
@@ -72,11 +105,17 @@ article {
   /*box-shadow: blue 0px 0px 0px 2px inset, rgb(255, 255, 255) 8px -8px 0px -3px, rgb(31, 193, 27) 8px -8px, rgb(255, 255, 255) 16px -16px 0px -3px, rgb(255, 217, 19) 16px -16px, rgb(255, 255, 255) 24px -24px 0px -3px, rgb(255, 156, 85) 24px -24px, rgb(255, 255, 255) 32px -32px 0px -3px, rgb(255, 85, 85) 32px -32px;*/
 }
 
+/* iframes (the location preview) should look vibey. */
 iframe {
   border: 2px solid black;
   box-shadow: 8px 8px 0px black;
 }
 
+.location-preview {
+  margin-bottom: 12px;
+}
+
+/* Anchor buttons should look vibey. */
 a[role=button] {
   border-radius: 0px;
   box-shadow: 8px 8px 0px black;

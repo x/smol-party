@@ -10,3 +10,6 @@ function shareEvent(title, text, url) {
       .catch((error) => console.log("Error sharing", error));
   }
 }
+
+const jsConfetti = new JSConfetti({ canvas })
+jsConfetti.addConfetti()

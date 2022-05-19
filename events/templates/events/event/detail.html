@@ -45,14 +45,12 @@
                         {% if is_rsvped %}
                             <a role="button">You're RSVP'd!</a>
                         {% else %}
-                            <a href="{% url 'events:rsvp' event.id %}"
-                               role="button">RSVP Now</a>
+                            <a href="{% url 'events:rsvp' event.id %}" role="button">RSVP Now</a>
                         {% endif %}
                         <a role="button"
                            onclick='shareEvent("Smol.Party - {{ event.title }}", "RSVP to this event!", window.location.href)'>Share</a>
-                        <a href="{{ event.add_to_gcal_link|safe }}"
-						   role="button">Add to Gcal</a>
-					</div>
+                        <a href="{{ event.add_to_gcal_link|safe }}" role="button">Add to Gcal</a>
+                    </div>
                     <div>
                         <h2 class="party-detail-header">Responses</h2>
                         {{ rsvp_ids }}
@@ -84,6 +82,25 @@
         use to <a href="../create">make your own smol party</a> invite.</small></center>
     </footer>
 </main>
+<!-- TODO: Vendor -->
+<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+<!-- TODO: Move to own js file. -->
+<script>
+// Setup the confetti.
+const jsConfetti = new JSConfetti();
+
+// Use this for testing the confetti.
+function launchConfetti() {
+    jsConfetti.addConfetti({
+        "emojis": Array.from("{{ event.confetti_emojis }}"),
+        "confettiNumber": {{ event.confetti_amount }},
+    });
+}
+{% if event.has_confetti %}
+// Launch confetti.
+launchConfetti();
+{% endif %}
+</script>
 </body>
 {% include "../footer.html" %}
 </html>

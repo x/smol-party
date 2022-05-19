@@ -9,7 +9,7 @@
     <body>
         <main class="container">
             <article>
-                <form method="post">
+            <form method="post">
                     {{ form.non_field_errors }}
                     {% csrf_token %}
                     {{ form.title.errors }}
@@ -49,7 +49,37 @@
                         {% render_field form.location %}
                         <div id="location-preview"></div>
                     </div>
-                    <br />
+                    <div class="fieldWrapper">
+                        {{ form.has_confetti.errors }}
+                        {% render_field form.has_confetti %}
+                        <label for="{{ form.has_confetti.id_for_label }}">
+                            <span class="party-detail">Launch Confetti When Opened</span>
+                        </label>
+                        <div class="grid hidable">
+                            <div class="fieldWrapper">
+                                {{ form.confetti_emojis.errors }}
+                                <label for="{{ form.location.id_for_label }}">
+                                    <span class="party-detail">Confetti Emojis</span>
+                                </label>
+                                {% render_field form.confetti_emojis value="🎉✨🍾" %}
+                            </div>
+                            <div class="fieldWrapper">
+                                {{ form.confetti_amount.errors }}
+                                <label for="{{ form.location.id_for_label }}">
+                                    <span class="party-detail">Confetti Amount</span>
+                                </label>
+                                {% render_field form.confetti_amount value="100" %}
+                            </div>
+                            <div>
+                                <label for="{{ form.location.id_for_label }}">
+                                    <span class="party-detail">Test</span>
+                                </label>
+                                <a role="button"
+                                   onclick="event.preventDefault();launchConfetti()"
+                                   href="#">Confetti Me</a>
+                            </div>
+                        </div>
+                    </div>
                     {% if object %}
                         <input type="submit" value="Update Party".>
                         <hr />
@@ -62,11 +92,12 @@
         </main>
         <!-- TODO: Vendor -->
         <script src="https://unpkg.com/pell"></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
         <!-- TODO: Move to own js file. -->
         <script>
         function previewLocation(location) {
             var mapsUrl = "https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=" + encodeURIComponent(location) + "&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed";
-            var embedHtml = '<iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="' + mapsUrl + '"></iframe></div>';
+            var embedHtml = '<div class="location-preview"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="' + mapsUrl + '"></iframe></div>';
             document.getElementById("location-preview").innerHTML = embedHtml;
         }
 
@@ -74,9 +105,7 @@
         document.getElementById("id_location").addEventListener("input", function (e) {previewLocation(e.target.value);});
 
         // If the location is already set (someone is updating the event), preview it.
-        {% if event.location %}
-        previewLocation("{{ event.location }}");
-        {% endif %}
+        {% if event.location %}        previewLocation("{{ event.location }}");{% endif %}
 
         // Setup the editor.
         const editor = pell.init({
@@ -109,6 +138,17 @@
         })
         // If there's already some content (the form us being used for an update), set it.
         editor.content.innerHTML = document.getElementById('id_description').textContent;
+        
+        // Setup the confetti button.
+        const jsConfetti = new JSConfetti();
+        
+        // Use this for testing the confetti.
+        function launchConfetti() {
+            jsConfetti.addConfetti({
+                "emojis": Array.from(document.getElementById("id_confetti_emojis").value),
+                "confettiNumber": parseInt(document.getElementById("id_confetti_amount").value),
+            });
+        }
         </script>
     </body>
 </html>
