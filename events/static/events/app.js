@@ -11,5 +11,15 @@ function shareEvent(title, text, url) {
   }
 }
 
-const jsConfetti = new JSConfetti({ canvas })
-jsConfetti.addConfetti()
+var jsConfetti = null;
+
+// Use this for testing the confetti.
+function launchConfetti(emojisString, confettiAmount) {
+    if (jsConfetti === null) {
+      jsConfetti = new JSConfetti();
+    }
+    jsConfetti.addConfetti({
+        "emojis": Array.from(emojisString),
+        "confettiNumber": confettiAmount,
+    });
+}

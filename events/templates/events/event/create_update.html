@@ -75,7 +75,7 @@
                                     <span class="party-detail">Test</span>
                                 </label>
                                 <a role="button"
-                                   onclick="event.preventDefault();launchConfetti()"
+                                   onclick="event.preventDefault();testConfetti()"
                                    href="#">Confetti Me</a>
                             </div>
                         </div>
@@ -90,65 +90,61 @@
                 </form>
             </article>
         </main>
-        <!-- TODO: Vendor -->
-        <script src="https://unpkg.com/pell"></script>
-        <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-        <!-- TODO: Move to own js file. -->
-        <script>
-        function previewLocation(location) {
-            var mapsUrl = "https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=" + encodeURIComponent(location) + "&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed";
-            var embedHtml = '<div class="location-preview"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="' + mapsUrl + '"></iframe></div>';
-            document.getElementById("location-preview").innerHTML = embedHtml;
-        }
+        <footer>
+            <!-- TODO: Vendor -->
+            <script src="https://unpkg.com/pell"></script>
+            {% include "../footer.html" %}
+            <!-- TODO: Move to own js file. -->
+            <script>
+                function previewLocation(location) {
+                    var mapsUrl = "https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=" + encodeURIComponent(location) + "&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed";
+                    var embedHtml = '<div class="location-preview"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="' + mapsUrl + '"></iframe></div>';
+                    document.getElementById("location-preview").innerHTML = embedHtml;
+                }
 
-        // Setup the location preview so it updates when someone types into the field.
-        document.getElementById("id_location").addEventListener("input", function (e) {previewLocation(e.target.value);});
+                // Setup the location preview so it updates when someone types into the field.
+                document.getElementById("id_location").addEventListener("input", function (e) {previewLocation(e.target.value);});
 
-        // If the location is already set (someone is updating the event), preview it.
-        {% if event.location %}        previewLocation("{{ event.location }}");{% endif %}
+                // If the location is already set (someone is updating the event), preview it.
+                {% if event.location %}                previewLocation("{{ event.location }}"){% endif %}
 
-        // Setup the editor.
-        const editor = pell.init({
-            element: document.getElementById('editor'),
-            onChange: html => {
-                document.getElementById('id_description').textContent = html
-            },
-            styleWithCSS: true,
-            actions: [
-                'bold',
-                'underline',
-                'italic',
-                'strikethrough',
-                {
-                  name: 'heading1',
-                  icon: '<b>H</b>',
-                  title: 'Heading 1',
-                  result: () => pell.exec('formatBlock', '<h1>')
-                },
-                'line',
-                'olist',
-                'ulist',
-                'image',
-                'link',
-            ],
-            // Define the content class differently or else the unset breaks things.
-            classes: {
-                content: 'party-description',
-            }
-        })
-        // If there's already some content (the form us being used for an update), set it.
-        editor.content.innerHTML = document.getElementById('id_description').textContent;
+                // Setup the editor.
+                const editor = pell.init({
+                    element: document.getElementById('editor'),
+                    onChange: html => {
+                        document.getElementById('id_description').textContent = html
+                    },
+                    styleWithCSS: true,
+                    actions: [
+                        'bold',
+                        'underline',
+                        'italic',
+                        'strikethrough',
+                        {
+                          name: 'heading1',
+                          icon: '<b>H</b>',
+                          title: 'Heading 1',
+                          result: () => pell.exec('formatBlock', '<h1>')
+                        },
+                        'line',
+                        'olist',
+                        'ulist',
+                        'image',
+                        'link',
+                    ],
+                    // Define the content class differently or else the unset breaks things.
+                    classes: {
+                        content: 'party-description',
+                    }
+                })
+                // If there's already some content (the form us being used for an update), set it.
+                editor.content.innerHTML = document.getElementById('id_description').textContent;
         
-        // Setup the confetti button.
-        const jsConfetti = new JSConfetti();
-        
-        // Use this for testing the confetti.
-        function launchConfetti() {
-            jsConfetti.addConfetti({
-                "emojis": Array.from(document.getElementById("id_confetti_emojis").value),
-                "confettiNumber": parseInt(document.getElementById("id_confetti_amount").value),
-            });
-        }
-        </script>
+                // Use this for testing the confetti.
+                function testConfetti() {
+                    launchConfetti(document.getElementById("id_confetti_emojis").value, document.getElementById("id_confetti_amount").value);
+                }
+            </script>
+        </footer>
     </body>
 </html>
