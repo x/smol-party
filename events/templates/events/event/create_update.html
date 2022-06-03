@@ -9,7 +9,7 @@
     <body>
         <main class="container">
             <article>
-            <form method="post">
+                <form method="post">
                     {{ form.non_field_errors }}
                     {% csrf_token %}
                     {{ form.title.errors }}
