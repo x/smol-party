@@ -45,14 +45,12 @@
                         {% if is_rsvped %}
                             <a role="button">You're RSVP'd!</a>
                         {% else %}
-                            <a href="{% url 'events:rsvp' event.id %}"
-                               role="button">RSVP Now</a>
+                            <a href="{% url 'events:rsvp' event.id %}" role="button">RSVP Now</a>
                         {% endif %}
                         <a role="button"
                            onclick='shareEvent("Smol.Party - {{ event.title }}", "RSVP to this event!", window.location.href)'>Share</a>
-                        <a href="{{ event.add_to_gcal_link|safe }}"
-						   role="button">Add to Gcal</a>
-					</div>
+                        <a href="{{ event.add_to_gcal_link|safe }}" role="button">Add to Gcal</a>
+                    </div>
                     <div>
                         <h2 class="party-detail-header">Responses</h2>
                         {{ rsvp_ids }}
@@ -85,5 +83,12 @@
     </footer>
 </main>
 </body>
-{% include "../footer.html" %}
+<footer>
+    {% include "../footer.html" %}
+    <script>
+        {% if event.has_confetti %}
+        launchConfetti("{{ event.confetti_emojis }}", {{ event.confetti_amount }});
+        {% endif %}
+    </script>
+</footer>
 </html>
