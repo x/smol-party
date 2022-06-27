@@ -94,19 +94,17 @@
             <!-- TODO: Vendor -->
             <script src="https://unpkg.com/pell"></script>
             {% include "../footer.html" %}
-            <!-- TODO: Move to own js file. -->
             <script>
-                function previewLocation(location) {
-                    var mapsUrl = "https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=" + encodeURIComponent(location) + "&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed";
-                    var embedHtml = '<div class="location-preview"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="' + mapsUrl + '"></iframe></div>';
-                    document.getElementById("location-preview").innerHTML = embedHtml;
-                }
-
                 // Setup the location preview so it updates when someone types into the field.
-                document.getElementById("id_location").addEventListener("input", function (e) {previewLocation(e.target.value);});
+                document.getElementById("id_location").addEventListener(
+                    "input", function (e) {
+                        previewLocation(document.getElementById("location-preview"), e.target.value);
+                    });
 
                 // If the location is already set (someone is updating the event), preview it.
-                {% if event.location %}                previewLocation("{{ event.location }}"){% endif %}
+                {% if event.location %}
+                previewLocation(document.getElementById("location-preview"), "{{ event.location }}")
+                {% endif %}
 
                 // Setup the editor.
                 const editor = pell.init({
@@ -142,7 +140,10 @@
         
                 // Use this for testing the confetti.
                 function testConfetti() {
-                    launchConfetti(document.getElementById("id_confetti_emojis").value, document.getElementById("id_confetti_amount").value);
+                    launchConfetti(
+                        document.getElementById("id_confetti_emojis").value,
+                        document.getElementById("id_confetti_amount").value
+                    );
                 }
             </script>
         </footer>
