@@ -129,6 +129,14 @@
                         'ulist',
                         'image',
                         'link',
+                        {
+                          icon: '&#9998;',
+                          title: 'Insert HTML',
+                          result: () => {
+                            const url = window.prompt('Enter HTML');
+                            if (url) document.execCommand('insertHTML',false, url)
+                          }
+                        }
                     ],
                     // Define the content class differently or else the unset breaks things.
                     classes: {
