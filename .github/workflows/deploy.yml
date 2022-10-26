@@ -32,7 +32,7 @@ jobs:
 
       # Export the poetry.lock file to requirementx.txt
       - name: Export requirements.txt
-        run: poetry export -f requirements.txt --without-hashes -o requirements.txt
+        run: bash -c "poetry export -f requirements.txt --without-hashes | cut -d';' -f1 > requirements.txt"
 
       # Collectstatic
       - name: Collectstatic
