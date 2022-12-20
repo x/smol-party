@@ -1,58 +1,81 @@
 <!doctype html>
 <html lang="en" data-theme="light">
-    <head>
-        <!-- TODO this is copy-pasted from the events app header.html -->
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <meta name="description"
-              content="A simple app to create and collect RSVPs to events without logins, ads, or tracking."/>
-        <meta name="keywords" content="Events,RSVP,Smol,Party"/>
-        <meta name="author" content="Devon Peticolas"/>
-        <title>Smol Party</title>
-        {% load static %}
-        <!-- TODO: vendor me -->
-        <link rel="stylesheet"
-              href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-        <link rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family=Lobster">
-        <!-- Custom -->
-        <link rel="stylesheet"
-              type="text/css"
-              href="{% static 'events/style.css' %}">
-        <!-- Force light-mode -->
-        <!-- Metatags for Link Unfurling -->
-        <!-- facebook open graph tags -->
-        <meta property="og:site_name" content="Smol Party" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Smol Party 🎉" />
-        <meta property="og:description"
-              content="A smol party planning and rsvp app."/>
-        <!-- twitter card tags additive with the og: tags -->
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:domain" value="smol.party" />
-        <meta name="twitter:title" value="Smol Party 🎉" />
-        <meta name="twitter:description"
-              value="A smol party planning and rsvp app."/>
-    </head>
-    <body>
-        <main class="container">
-            <article>
-                <h1 class="party-title">
-                    <u>Smol.Party</u>
-                </h1>
-                <p>
-                    <b>Smol.Party</b> is a simple app to create and collect RSVPs to events in as low-touch
-                a method as possible, without logins, adds, or tracking.
+
+<head>
+    <!-- TODO this is copy-pasted from the events app header.html -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="A simple app to create and collect RSVPs to events without logins, ads, or tracking." />
+    <meta name="keywords" content="Events,RSVP,Smol,Party" />
+    <meta name="author" content="Devon Peticolas" />
+    <title>Smol Party</title>
+    {% load static %}
+    <!-- TODO: vendor me -->
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+    <!-- Custom -->
+    <link rel="stylesheet" type="text/css" href="{% static 'events/style.css' %}">
+    <!-- Force light-mode -->
+    <!-- Metatags for Link Unfurling -->
+    <!-- facebook open graph tags -->
+    <meta property="og:site_name" content="Smol Party" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Smol Party 🎉" />
+    <meta property="og:description" content="A smol party planning and rsvp app." />
+    <!-- twitter card tags additive with the og: tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" value="smol.party" />
+    <meta name="twitter:title" value="Smol Party 🎉" />
+    <meta name="twitter:description" value="A smol party planning and rsvp app." />
+</head>
+
+<body>
+    <main class="container">
+        <article>
+            <h1 class="party-title">
+                <u>Smol.Party</u>
+            </h1>
+            <p>
+                <b>Smol.Party</b> is a simple app to create and collect RSVPs to events in as low-touch
+                a method as possible without accounts or ads.
             </p>
             <p>
-            It's written by <a href="https://peticol.as">me</a>, is a work in progress, and will
-            probably break if you try to break it. If you'd like to make it better, please
-            <a href="https://github.com/x/smol-party">submit a pull request</a>.
-    </p>
-    <div class="grid">
-        <a href="{% url 'events:create' %}" role="button">Create a new Event</a>
-    </div>
-</article>
-</main>
+                It's written by <a href="https://peticol.as">me</a>, is a work in progress, and will
+                probably break if you try to break it. If you'd like to make it better, please
+                <a href="https://github.com/x/smol-party">submit a pull request</a>.
+            </p>
+
+            <div class="grid" style="display:flex">
+                <div style="flex: 33.33%">
+                    <u><small class="party-detail">Create a party!</small></u>
+                </div>
+                <div style="flex: 33.33%">
+                    <u><small class="party-detail">Share w/ friends!</small></u>
+                </div>
+                <div style="flex: 33.33%; justify-content: center">
+                    <u><small class="party-detail">Friends RSVP!</small></u>
+                </div>
+            </div>
+
+            <div class="grid" style="display:flex; align-items: center; justify-content: center;">
+                <div style="flex: 33.33%">
+                    <img src="{% static 'planner/create_party.png' %}" alt="Snow" style="width:100%">
+                </div>
+                <div style="flex: 33.33%">
+                    <img src="{% static 'planner/display_party.png' %}" alt="Forest" style="width:100%">
+                </div>
+                <div style="flex: 33.33%; justify-content: center">
+                    <img src="{% static 'planner/create_rsvp.png' %}" alt="Mountains" style="width:100%">
+                </div>
+            </div>
+            <br />
+
+            <div class="grid">
+                <a href="{% url 'events:create' %}" role="button">Create a new Event</a>
+            </div>
+        </article>
+    </main>
 </body>
+
 </html>
