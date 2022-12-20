@@ -47,26 +47,20 @@
             </p>
 
             <div class="grid" style="display:flex">
-                <div style="flex: 33.33%">
-                    <u><small class="party-detail">Create a party!</small></u>
+                <div style="flex: 33.33%; text-align: center;">
+                    <u><h2 class="party-detail" style="transform: rotate(-0.03turn);">Create!</h2></u>
+                    <img src="{% static 'planner/create_party.png' %}" style="width:100%">
+                    <!-- <u><h3 class="party-detail pseudo-mark" style="position: absolute; top: 10%; left: 50%; transform: translate(-50%, -50%) rotate(-0.05turn);">Create!</small></u> -->
                 </div>
-                <div style="flex: 33.33%">
-                    <u><small class="party-detail">Share w/ friends!</small></u>
+                <div style="flex: 33.33%; text-align: center;">
+                    <u><h2 class="party-detail" style="transform: rotate(-0.03turn);">Share!</h2></u>
+                    <img src="{% static 'planner/display_party.png' %}" style="width:100%">
+                    <!-- <u><h3 class="party-detail pseudo-mark" style="position: absolute; top: 10%; left: 50%; transform: translate(-50%, -50%) rotate(-0.05turn);">Share!</small></u> -->
                 </div>
-                <div style="flex: 33.33%; justify-content: center">
-                    <u><small class="party-detail">Friends RSVP!</small></u>
-                </div>
-            </div>
-
-            <div class="grid" style="display:flex; align-items: center; justify-content: center;">
-                <div style="flex: 33.33%">
-                    <img src="{% static 'planner/create_party.png' %}" alt="Snow" style="width:100%">
-                </div>
-                <div style="flex: 33.33%">
-                    <img src="{% static 'planner/display_party.png' %}" alt="Forest" style="width:100%">
-                </div>
-                <div style="flex: 33.33%; justify-content: center">
-                    <img src="{% static 'planner/create_rsvp.png' %}" alt="Mountains" style="width:100%">
+                <div style="flex: 33.33%; text-align: center;">
+                    <u><h2 class="party-detail" style="transform: rotate(-0.03turn);">RSVP!</h2></u>
+                    <img src="{% static 'planner/create_rsvp.png' %}" style="width:100%">
+                    <!-- <u><h3 class="party-detail pseudo-mark" style="position: absolute; top: 10%; left: 50%; transform: translate(-50%, -50%) rotate(-0.05turn);">RSVP!</small></u> -->
                 </div>
             </div>
             <br />
