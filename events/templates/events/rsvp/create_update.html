@@ -22,9 +22,15 @@
                         <hr>
                         <center><small>Or, <a href="{% url 'events:rsvp_delete' event.id rsvp.id %}?secret={{ rsvp.secret }}">click here</a> to delete your RSVP.</small></center>
                     {% else %}
-                        <input type="submit" value="Submit">
+                        <input type="submit" value="Submit" id="submit">
                     {% endif %}
                 </form>
             </article>
         </main>
+
+	<script>
+		const button = document.querySelector("#submit");
+		const disableButton = () => { button.disabled = true; };
+		button.addEventListener("click", disableButton);
+	</script>
     </body>
