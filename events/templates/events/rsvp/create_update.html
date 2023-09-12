@@ -8,7 +8,7 @@
                 <h1 class="party-title">
                     RSVP to <u>{{ event.title }}</u>
                 </h1>
-                <form method="post">
+                <form method="post" onSubmit="document.getElementById('submit').disabled=true;">
                     {% csrf_token %}
                     <div class="fieldWrapper">
                         {{ form.name.errors }}
@@ -22,7 +22,7 @@
                         <hr>
                         <center><small>Or, <a href="{% url 'events:rsvp_delete' event.id rsvp.id %}?secret={{ rsvp.secret }}">click here</a> to delete your RSVP.</small></center>
                     {% else %}
-                        <input type="submit" value="Submit" id="submit" onSubmit="document.getElementById('submit').disabled=true;">
+                        <input type="submit" value="Submit" id="submit">
                     {% endif %}
                 </form>
             </article>
