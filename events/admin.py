@@ -8,6 +8,7 @@ from .models import RSVP, Event
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ["title", "details_link", "edit_link"]
+    ordering = ["-created_at"]
 
     class Meta:
         model = Event
@@ -27,6 +28,7 @@ class EventAdmin(admin.ModelAdmin):
 @admin.register(RSVP)
 class RSVPAdmin(admin.ModelAdmin):
     list_display = ["name", "event_link", "edit_link"]
+    ordering = ["-created_at"]
 
     class Meta:
         model = RSVP
