@@ -50,6 +50,7 @@ else:
     payload = client.access_secret_version(name=name).payload.data.decode("UTF-8")
     env.read_env(io.StringIO(payload))
 
+SECURE_SSL_REDIRECT = !LOCAL
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: App Engine's security features ensure that it is safe to
